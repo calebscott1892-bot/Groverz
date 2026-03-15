@@ -25,7 +25,10 @@ const testimonials = [
   },
 ];
 
-export default function TestimonialsSection({ background = 'cream' }) {
+export default function TestimonialsSection({
+  background = 'cream',
+  description = "Feedback from individuals, sole traders and small business owners we've supported.",
+}) {
   return (
     <section className={background === 'cream' ? 'section-cream' : 'bg-white'}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
@@ -36,7 +39,7 @@ export default function TestimonialsSection({ background = 'cream' }) {
           <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
             What Our Clients Say
           </h2>
-          <p className="mt-4 text-lg text-gray-500">Here&apos;s what our clients have to say.</p>
+          <p className="mt-4 text-lg text-gray-500">{description}</p>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -66,8 +66,22 @@ export default function AboutPage() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-5">
-            <div className="lg:col-span-2">
+            <div className="space-y-5 lg:col-span-2">
               <PhotoPlaceholder />
+
+              <div className="rounded-xl border border-[#1e1b4b]/10 bg-[#1e1b4b]/[0.03] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1e1b4b]/60">
+                  At a Glance
+                </p>
+                <ul className="mt-4 space-y-3">
+                  {profileHighlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-3">
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#b91c1c]" />
+                      <span className="text-sm text-gray-600">{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="lg:col-span-3">
@@ -80,17 +94,6 @@ export default function AboutPage() {
               <p className="mb-6 mt-1 text-sm font-medium text-[#b91c1c]">
                 Principal / Founder | Registered Tax Agent
               </p>
-
-              <div className="mb-6 flex flex-wrap gap-2">
-                {profileHighlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="rounded-full border border-[#1e1b4b]/10 bg-[#1e1b4b]/5 px-3 py-1 text-xs font-medium text-[#1e1b4b]"
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </div>
 
               <div className="space-y-4 text-base leading-relaxed text-gray-600">
                 <p>
@@ -133,7 +136,7 @@ export default function AboutPage() {
             {helpCards.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="rounded-xl border border-gray-100 bg-white p-6 transition-shadow hover:shadow-md"
+                className="h-full rounded-xl border border-gray-100 bg-white p-6 transition-shadow hover:shadow-md"
               >
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-[#b91c1c]/10">
                   <Icon className="h-5 w-5 text-[#b91c1c]" />
@@ -172,11 +175,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <ProcessTimelineSection title="What it's like to work together" />
-      <FaqSection title="Questions we often hear" />
+      <ProcessTimelineSection
+        title="What it's like to work together"
+        description="From the first conversation to ongoing support, we keep the process clear, calm and easy to follow."
+      />
+      <FaqSection
+        title="Questions we often hear"
+        description="A few of the common questions clients ask before getting started with us."
+      />
       <CallToActionSection
         title="Need straightforward advice?"
         description="If you'd like a practical second opinion or help getting organised, get in touch and we'll talk through the best next step."
+        primaryLabel="Talk to Us"
       />
     </div>
   );

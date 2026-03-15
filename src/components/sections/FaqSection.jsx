@@ -35,13 +35,22 @@ const defaultItems = [
   },
 ];
 
-export default function FaqSection({ items = defaultItems, title = 'Frequently asked questions' }) {
+export default function FaqSection({
+  items = defaultItems,
+  title = 'Frequently asked questions',
+  description = null,
+}) {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <h2 className="mb-10 text-center text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-          {title}
-        </h2>
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">{title}</h2>
+          {description && (
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-gray-500">
+              {description}
+            </p>
+          )}
+        </div>
 
         <Accordion type="single" collapsible className="space-y-2">
           {items.map(({ question, answer }, index) => (

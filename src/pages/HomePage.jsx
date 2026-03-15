@@ -107,7 +107,7 @@ export default function HomePage() {
           </p>
           <Link to={getPagePath('Contact')} className="mt-6 inline-block">
             <Button className="h-auto bg-[#b91c1c] px-8 py-3 text-base font-semibold text-white hover:bg-[#991b1b]">
-              Get in Touch
+              Start Your Enquiry
             </Button>
           </Link>
         </div>
@@ -252,16 +252,16 @@ export default function HomePage() {
               Tax, Accounting & Finance Solutions
             </h2>
             <p className="mt-4 text-lg text-gray-500">
-              From individual tax returns to complex business structures - we&apos;ve got you
-              covered.
+              From straightforward returns to business structures and finance support, our services
+              are designed to keep things clear and practical.
             </p>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {serviceCards.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="group rounded-xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-[#b91c1c]/20 hover:shadow-lg"
+                className="group h-full rounded-xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-[#b91c1c]/20 hover:shadow-lg"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#b91c1c]/10 transition-colors group-hover:bg-[#b91c1c]/20">
                   <Icon className="h-6 w-6 text-[#b91c1c]" />
@@ -296,8 +296,8 @@ export default function HomePage() {
                 The Groverz Difference
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                We combine professional expertise with a personal touch, ensuring every client
-                receives the attention and care they deserve.
+                We aim to make tax and accounting feel organised, responsive and straightforward
+                from the first conversation.
               </p>
               <ul className="mt-6 space-y-3">
                 {reasonsToChooseGroverz.map((reason) => (
@@ -310,6 +310,9 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+                Before you book
+              </p>
               <h3 className="mb-4 text-xl font-bold text-[#1e1b4b]">
                 What to bring to your appointment
               </h3>
@@ -329,7 +332,12 @@ export default function HomePage() {
 
       <TaxRefundEstimatorSection />
       <TestimonialsSection background="cream" />
-      <CallToActionSection />
+      <CallToActionSection
+        title="Ready to sort out your tax or accounting?"
+        description="Start with a quick conversation and we'll help you work out the most practical next step."
+        primaryLabel="Start Your Enquiry"
+        secondaryLabel="Call Us"
+      />
     </div>
   );
 }

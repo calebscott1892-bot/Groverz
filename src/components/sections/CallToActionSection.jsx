@@ -9,6 +9,8 @@ import { businessDetails } from '@/config/site';
 export default function CallToActionSection({
   title = 'Ready to get started?',
   description = 'Get in touch for a no-obligation conversation about your tax and accounting needs.',
+  primaryLabel = 'Get in Touch',
+  secondaryLabel = 'Call Us',
 }) {
   return (
     <section className="section-navy py-12 sm:py-14">
@@ -21,7 +23,7 @@ export default function CallToActionSection({
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link to={getPagePath('Contact')}>
             <Button className="h-auto bg-[#b91c1c] px-7 py-3 text-base font-semibold text-white hover:bg-[#991b1b]">
-              Get in Touch
+              {primaryLabel}
             </Button>
           </Link>
 
@@ -31,7 +33,7 @@ export default function CallToActionSection({
               className="h-auto gap-2 border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10"
             >
               <Phone className="h-4 w-4" />
-              Call Now
+              {secondaryLabel}
             </Button>
           </a>
         </div>

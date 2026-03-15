@@ -23,17 +23,24 @@ const defaultItems = [
   },
 ];
 
-export default function ProcessTimelineSection({ items = defaultItems, title = 'How it works' }) {
+export default function ProcessTimelineSection({
+  items = defaultItems,
+  title = 'How it works',
+  description = null,
+}) {
   return (
     <section className="section-cream">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <h2 className="mb-12 text-center text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-          {title}
-        </h2>
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">{title}</h2>
+          {description && (
+            <p className="mt-4 text-lg leading-relaxed text-gray-500">{description}</p>
+          )}
+        </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(({ number, title: itemTitle, description }) => (
-            <div key={number} className="rounded-xl border border-gray-100 bg-white p-6">
+            <div key={number} className="h-full rounded-xl border border-gray-100 bg-white p-6">
               <div className="mb-3 text-3xl font-bold text-[#b91c1c]/20">{number}</div>
               <h3 className="mb-2 text-base font-semibold text-[#1e1b4b]">{itemTitle}</h3>
               <p className="text-sm leading-relaxed text-gray-500">{description}</p>

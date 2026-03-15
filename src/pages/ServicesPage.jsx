@@ -211,6 +211,9 @@ export default function ServicesPage() {
       <section className="bg-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-8 max-w-2xl text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+              Service categories
+            </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
               Our services
             </h2>
@@ -222,7 +225,7 @@ export default function ServicesPage() {
 
           <div className="mb-8 grid gap-4 md:grid-cols-3">
             {serviceHighlights.map(({ title, description }) => (
-              <div key={title} className="rounded-xl border border-gray-100 bg-gray-50 p-5">
+              <div key={title} className="h-full rounded-xl border border-gray-100 bg-gray-50 p-5">
                 <h3 className="text-sm font-semibold text-[#1e1b4b]">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-500">{description}</p>
               </div>
@@ -269,9 +272,16 @@ export default function ServicesPage() {
       <section className="section-cream">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+              Client fit
+            </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
               Who we help
             </h2>
+            <p className="mt-4 text-lg leading-relaxed text-gray-500">
+              We work with clients at different stages, from individual returns through to more
+              complex business and entity structures.
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -304,12 +314,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <ProcessTimelineSection />
+      <ProcessTimelineSection description="Once you reach out, we keep the next steps clear so you know what to expect at each stage." />
       <TaxRefundEstimatorSection />
-      <FaqSection title="Service questions" />
+      <FaqSection
+        title="Service questions"
+        description="A few common questions about scope, timing and how we usually work with new clients."
+      />
       <CallToActionSection
         title="Not sure which service fits?"
         description="Tell us a little about your situation and we'll point you to the right starting point before any work begins."
+        primaryLabel="Ask About Services"
       />
     </div>
   );

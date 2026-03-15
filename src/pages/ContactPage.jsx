@@ -57,6 +57,12 @@ const serviceOptions = [
   { value: 'other', label: 'Other / General Enquiry' },
 ];
 
+const enquiryNotes = [
+  { title: 'Response time', detail: 'Usually within one business day' },
+  { title: 'Best for', detail: 'Detailed questions or a clear outline of what you need' },
+  { title: 'Callback', detail: "Add your phone number if you'd like us to call you back" },
+];
+
 const initialFormState = {
   name: '',
   email: '',
@@ -158,7 +164,10 @@ export default function ContactPage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {contactCards.map(
               ({ icon: Icon, title, content, secondary, href, secondaryHref, external }) => (
-                <div key={title} className="rounded-xl border border-gray-100 bg-gray-50 p-6">
+                <div
+                  key={title}
+                  className="flex h-full flex-col rounded-xl border border-gray-100 bg-gray-50 p-6"
+                >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-[#b91c1c]/10">
                     <Icon className="h-5 w-5 text-[#b91c1c]" />
                   </div>
@@ -240,6 +249,20 @@ export default function ContactPage() {
                     <input type="hidden" name="form-name" value={contactFormName} />
                     <input type="hidden" name="service" value={selectedServiceLabel} />
 
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {enquiryNotes.map(({ title, detail }) => (
+                        <div
+                          key={title}
+                          className="rounded-lg border border-gray-100 bg-gray-50 px-4 py-3"
+                        >
+                          <p className="text-xs font-semibold uppercase tracking-wider text-[#1e1b4b]">
+                            {title}
+                          </p>
+                          <p className="mt-1 text-xs leading-relaxed text-gray-500">{detail}</p>
+                        </div>
+                      ))}
+                    </div>
+
                     <div className="hidden">
                       <Label htmlFor="bot-field">Leave this field blank</Label>
                       <Input
@@ -286,7 +309,7 @@ export default function ContactPage() {
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-1.5">
                         <Label htmlFor="phone" className="text-sm">
-                          Phone Number
+                          Phone Number (optional)
                         </Label>
                         <Input
                           id="phone"
@@ -300,7 +323,7 @@ export default function ContactPage() {
 
                       <div className="space-y-1.5">
                         <Label htmlFor="service" className="text-sm">
-                          Service Needed
+                          Service Needed (optional)
                         </Label>
                         <Select
                           value={formState.service}
