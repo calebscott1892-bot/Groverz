@@ -20,7 +20,7 @@ import ProcessTimelineSection from '@/components/sections/ProcessTimelineSection
 import TaxRefundEstimatorSection from '@/components/sections/TaxRefundEstimatorSection';
 
 const serviceCategories = [
-  { key: 'all', label: 'All Services' },
+  { key: 'all', label: 'All services' },
   { key: 'personal', label: 'Personal' },
   { key: 'business', label: 'Business' },
   { key: 'corporate', label: 'Trusts & Companies' },
@@ -215,7 +215,7 @@ export default function ServicesPage() {
               Service categories
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              Our services
+              Service areas
             </h2>
             <p className="mt-3 text-gray-500">
               Choose a category to narrow the list, then open any service to see what&apos;s

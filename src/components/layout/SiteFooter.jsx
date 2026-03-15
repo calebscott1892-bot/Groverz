@@ -21,7 +21,7 @@ export default function SiteFooter() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/90">
-              Quick Links
+              Quick links
             </h4>
             <ul className="space-y-2.5">
               {primaryNavItems.map(({ label, pageKey }) => (

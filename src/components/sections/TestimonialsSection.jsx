@@ -34,10 +34,10 @@ export default function TestimonialsSection({
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-            Client Feedback
+            Client feedback
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-            What Our Clients Say
+            What clients say
           </h2>
           <p className="mt-4 text-lg text-gray-500">{description}</p>
         </div>

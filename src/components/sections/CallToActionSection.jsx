@@ -9,7 +9,7 @@ import { businessDetails } from '@/config/site';
 export default function CallToActionSection({
   title = 'Ready to get started?',
   description = 'Get in touch for a no-obligation conversation about your tax and accounting needs.',
-  primaryLabel = 'Get in Touch',
+  primaryLabel = 'Contact Us',
   secondaryLabel = 'Call Us',
 }) {
   return (

@@ -82,7 +82,7 @@ export default function TaxRefundEstimatorSection() {
                   <Calculator className="h-5 w-5 text-white" />
                 </div>
                 <p className="text-sm font-semibold uppercase tracking-wider text-white/60">
-                  Free Tool
+                  Free tool
                 </p>
               </div>
 
@@ -126,7 +126,7 @@ export default function TaxRefundEstimatorSection() {
                   </div>
                   <Link to={getPagePath('Contact')} className="mt-3 inline-block">
                     <Button className="h-auto bg-[#b91c1c] px-7 py-2.5 font-semibold text-white hover:bg-[#991b1b]">
-                      Get in Touch
+                      Talk to Us
                     </Button>
                   </Link>
                 </div>
@@ -144,6 +144,7 @@ export default function TaxRefundEstimatorSection() {
                     type="number"
                     min="0"
                     required
+                    inputMode="numeric"
                     placeholder="e.g. 75000"
                     value={formState.income}
                     onChange={(event) => handleFieldChange('income', event.target.value)}
@@ -159,6 +160,7 @@ export default function TaxRefundEstimatorSection() {
                     type="number"
                     min="0"
                     required
+                    inputMode="numeric"
                     placeholder="e.g. 16000"
                     value={formState.taxWithheld}
                     onChange={(event) => handleFieldChange('taxWithheld', event.target.value)}
@@ -174,6 +176,7 @@ export default function TaxRefundEstimatorSection() {
                     id="est-deductions"
                     type="number"
                     min="0"
+                    inputMode="numeric"
                     placeholder="e.g. 3000"
                     value={formState.deductions}
                     onChange={(event) => handleFieldChange('deductions', event.target.value)}
@@ -183,7 +186,7 @@ export default function TaxRefundEstimatorSection() {
                   </p>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
                   <Button
                     type="submit"
                     className="h-auto flex-1 gap-2 bg-[#b91c1c] px-6 py-2.5 font-semibold text-white hover:bg-[#991b1b]"
@@ -210,7 +213,8 @@ export default function TaxRefundEstimatorSection() {
                 <p className="text-xs leading-relaxed text-gray-400">
                   This is a simplified estimate only, based on 2024-25 Australian resident tax
                   rates. It does not include Medicare levy, HELP repayments, offsets or other
-                  factors. For an accurate assessment, book a consultation with our team.
+                  factors. For an accurate assessment, get in touch and we can review your situation
+                  in more detail.
                 </p>
               </div>
             </div>

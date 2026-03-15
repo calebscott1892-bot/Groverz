@@ -49,10 +49,10 @@ const expectations = [
   { icon: CheckCircle, text: 'No surprises on fees' },
 ];
 
-const profileHighlights = [
-  'Independent practice for 5 years',
-  'Cannington-based for 10 years',
-  'Curtin University graduate',
+const profileFacts = [
+  { label: 'Local base', value: 'East Cannington, WA' },
+  { label: 'Practice', value: 'Independent practice for 5 years' },
+  { label: 'Background', value: 'Curtin University graduate' },
 ];
 
 export default function AboutPage() {
@@ -67,50 +67,87 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-5">
             <div className="space-y-5 lg:col-span-2">
-              <PhotoPlaceholder />
+              <PhotoPlaceholder facts={profileFacts} />
 
-              <div className="rounded-xl border border-[#1e1b4b]/10 bg-[#1e1b4b]/[0.03] p-5">
+              <div className="rounded-2xl border border-[#1e1b4b]/10 bg-[#1e1b4b]/[0.03] p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1e1b4b]/60">
-                  At a Glance
+                  What guides the work
                 </p>
                 <ul className="mt-4 space-y-3">
-                  {profileHighlights.map((highlight) => (
-                    <li key={highlight} className="flex items-start gap-3">
+                  {expectations.slice(0, 3).map(({ text }) => (
+                    <li key={text} className="flex items-start gap-3">
                       <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#b91c1c]" />
-                      <span className="text-sm text-gray-600">{highlight}</span>
+                      <span className="text-sm text-gray-600">{text}</span>
                     </li>
                   ))}
                 </ul>
+                <p className="mt-4 border-t border-[#1e1b4b]/10 pt-4 text-sm leading-relaxed text-gray-500">
+                  The aim is to keep tax and accounting support clear, steady and easy to deal with
+                  from the first conversation onward.
+                </p>
               </div>
             </div>
 
-            <div className="lg:col-span-3">
-              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+            <div className="lg:col-span-3 lg:pt-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.26em] text-[#b91c1c]">
                 Meet Ankit
               </p>
-              <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-                Ankit Grover
+              <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
+                A local practice built on clear advice and dependable follow-through
               </h2>
-              <p className="mb-6 mt-1 text-sm font-medium text-[#b91c1c]">
+              <p className="mt-3 text-sm font-medium text-[#b91c1c]">
                 Principal / Founder | Registered Tax Agent
               </p>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#1e1b4b]/80">
+                Groverz Tax & Accounting Solutions was founded to give individuals and small
+                businesses practical support without the runaround.
+              </p>
 
-              <div className="space-y-4 text-base leading-relaxed text-gray-600">
-                <p>
-                  Ankit Grover founded Groverz Tax & Accounting Solutions to give individuals and
-                  small businesses clear, practical support without the runaround. After moving from
-                  India to Australia in 2008 and completing his degrees at Curtin University, he
-                  built his practice in Cannington and has spent the past decade in the local area.
-                </p>
-                <p>
-                  With five years in independent practice, his focus is simple: accurate work,
-                  straightforward communication and advice that helps clients stay organised,
-                  compliant and confident year-round.
-                </p>
-                <p>
-                  Outside the office, he enjoys spending time with his family, being outdoors and
-                  making the most of Perth&apos;s rivers and beaches.
-                </p>
+              <div className="mt-10 space-y-8">
+                <div className="max-w-3xl">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
+                    Background
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-gray-600">
+                    Ankit Grover moved from India to Australia in 2008 and completed his degrees at
+                    Curtin University. He later built his practice in Cannington and has spent the
+                    past decade in the local area.
+                  </p>
+                </div>
+
+                <div className="grid gap-8 border-t border-[#1e1b4b]/10 pt-8 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
+                      Service approach
+                    </p>
+                    <p className="mt-3 text-base leading-relaxed text-gray-600">
+                      With five years in independent practice, his focus is simple: accurate work,
+                      straightforward communication and advice that helps clients stay organised,
+                      compliant and confident year-round.
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
+                      Local perspective
+                    </p>
+                    <p className="mt-3 text-base leading-relaxed text-gray-600">
+                      Outside the office, he enjoys spending time with his family, being outdoors
+                      and making the most of Perth&apos;s rivers and beaches.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="max-w-3xl rounded-2xl border border-[#1e1b4b]/10 bg-[#f8f5ef] p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
+                    Why clients come to us
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-gray-600">
+                    The practice is set up for people who want one steady point of contact for tax
+                    returns, business accounting, BAS and ongoing advice, with clear communication
+                    around what is needed next.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -121,14 +158,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Services
+              Practice Areas
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-              How I can help
+              Where clients usually need support
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              From straightforward returns to ongoing business support, these are the areas clients
-              most often come to us for help with.
+              Support is centred on the work most individuals and small businesses need handled
+              properly, on time and with clear advice around it.
             </p>
           </div>
 
@@ -152,12 +189,15 @@ export default function AboutPage() {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+              Service Style
+            </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              What you can expect
+              How the practice works day to day
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              Our approach is built around clear advice, reliable follow-through and a process that
-              feels easy to deal with.
+              The service approach is built around clear explanations, dependable follow-through and
+              a process that feels straightforward to deal with.
             </p>
           </div>
 

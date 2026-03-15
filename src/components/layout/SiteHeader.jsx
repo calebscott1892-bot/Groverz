@@ -47,7 +47,7 @@ export default function SiteHeader({ activePageKey }) {
           </a>
           <Link to={getPagePath('Contact')}>
             <Button className="bg-[#b91c1c] px-5 text-sm font-semibold text-white hover:bg-[#991b1b]">
-              Get in Touch
+              Contact Us
             </Button>
           </Link>
         </div>
@@ -92,7 +92,7 @@ export default function SiteHeader({ activePageKey }) {
             </a>
             <Link to={getPagePath('Contact')} onClick={closeMobileMenu}>
               <Button className="mt-2 w-full bg-[#b91c1c] text-white hover:bg-[#991b1b]">
-                Get in Touch
+                Contact Us
               </Button>
             </Link>
           </div>

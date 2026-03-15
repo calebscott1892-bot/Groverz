@@ -132,7 +132,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="max-w-3xl">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              About Us
+              About us
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
               Your Trusted Tax & Accounting Partner
@@ -151,7 +151,7 @@ export default function HomePage() {
                 variant="outline"
                 className="h-auto border-[#1e1b4b] px-6 py-2.5 font-semibold text-[#1e1b4b] hover:bg-[#1e1b4b] hover:text-white"
               >
-                Learn More About Us
+                About the Practice
               </Button>
             </Link>
           </div>
@@ -198,11 +198,11 @@ export default function HomePage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100">
                 <AlertTriangle className="h-5 w-5 text-amber-600" />
               </div>
-              <h3 className="text-lg font-bold text-[#1e1b4b]">Did You Know?</h3>
+              <h3 className="text-lg font-bold text-[#1e1b4b]">Late lodgement penalties</h3>
             </div>
 
             <h4 className="mb-3 text-base font-semibold text-[#1e1b4b]">
-              Penalties for Failure to Lodge on Time
+              Failure to lodge on time can attract ATO penalties
             </h4>
 
             <div className="space-y-3 text-sm leading-relaxed text-gray-600">
@@ -234,7 +234,7 @@ export default function HomePage() {
             <div className="mt-6 border-t border-gray-100 pt-4">
               <Link to={getPagePath('Contact')}>
                 <Button className="h-auto w-full bg-[#b91c1c] py-2.5 font-semibold text-white hover:bg-[#991b1b]">
-                  Get in Touch
+                  Talk to Us
                 </Button>
               </Link>
             </div>
@@ -246,10 +246,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Our Services
+              Our services
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-              Tax, Accounting & Finance Solutions
+              Tax, accounting & finance solutions
             </h2>
             <p className="mt-4 text-lg text-gray-500">
               From straightforward returns to business structures and finance support, our services
@@ -278,7 +278,7 @@ export default function HomePage() {
                 variant="outline"
                 className="h-auto border-[#1e1b4b] px-7 py-2.5 font-semibold text-[#1e1b4b] hover:bg-[#1e1b4b] hover:text-white"
               >
-                View All Services
+                Explore Services
               </Button>
             </Link>
           </div>
@@ -290,7 +290,7 @@ export default function HomePage() {
           <div className="grid items-start gap-12 lg:grid-cols-2">
             <div>
               <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-                Why Choose Us
+                Why choose us
               </p>
               <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
                 The Groverz Difference
