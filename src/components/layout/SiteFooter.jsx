@@ -12,7 +12,7 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <BrandMark className="mb-4 inline-block" />
+            <BrandMark className="mb-4 h-12 w-fit" />
             <p className="text-sm leading-relaxed text-white/60">
               Professional tax and accounting services for individuals and businesses across Perth.
             </p>
