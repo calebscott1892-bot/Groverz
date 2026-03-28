@@ -17,7 +17,7 @@ export default function PageHeroSection({
         <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/4 translate-y-1/2 rounded-full bg-white" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+      <div className="section-shell relative py-14 sm:py-16 lg:py-20">
         <div className="max-w-2xl">
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
             {title}

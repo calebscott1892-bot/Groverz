@@ -91,32 +91,39 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="hero-gradient relative flex min-h-[380px] items-center overflow-hidden sm:min-h-[440px]">
+      <section className="hero-gradient relative isolate flex min-h-[420px] items-center overflow-hidden sm:min-h-[500px]">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 right-0 h-96 w-96 translate-x-1/3 -translate-y-1/2 rounded-full bg-white" />
           <div className="absolute bottom-0 left-0 h-64 w-64 -translate-x-1/4 translate-y-1/2 rounded-full bg-white" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <h1 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Maximise Your Tax Refunds Legally
-          </h1>
-          <p className="mt-4 text-xl font-semibold text-white/80 sm:text-2xl">Starting from $80</p>
-          <p className="mt-2 max-w-md text-base text-white/60">
-            Professional tax and accounting support for individuals and businesses across Perth.
-          </p>
-          <Link to={getPagePath('Contact')} className="mt-6 inline-block">
-            <Button className="h-auto bg-[#b91c1c] px-8 py-3 text-base font-semibold text-white hover:bg-[#991b1b]">
-              Start Your Enquiry
-            </Button>
-          </Link>
+        <div className="section-shell relative w-full py-16 sm:py-20 lg:py-24">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/75">
+              Tax & accounting support in Perth
+            </p>
+            <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Maximise Your Tax Refunds Legally
+            </h1>
+            <p className="mt-4 text-xl font-semibold text-white/85 sm:text-2xl">
+              Starting from $80
+            </p>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+              Professional tax and accounting support for individuals and businesses across Perth.
+            </p>
+            <Link to={getPagePath('Contact')} className="mt-8 inline-block">
+              <Button className="h-auto bg-[#b91c1c] px-8 py-3 text-base font-semibold text-white hover:bg-[#991b1b]">
+                Start Your Enquiry
+              </Button>
+            </Link>
+          </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#b91c1c]" />
       </section>
 
       <section className="border-b border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="section-shell py-8">
           <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
             {homepageStats.map(({ value, label }) => (
               <div key={label}>
@@ -129,7 +136,7 @@ export default function HomePage() {
       </section>
 
       <section className="section-cream">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="section-shell section-space">
           <div className="max-w-3xl">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
               About us
@@ -159,7 +166,7 @@ export default function HomePage() {
       </section>
 
       <section className="border-y border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+        <div className="section-shell py-5">
           <div className="flex flex-col items-center justify-center gap-2 text-center sm:flex-row sm:text-left">
             <AlertTriangle className="h-5 w-5 flex-shrink-0 text-amber-500" />
             <p className="text-sm text-gray-600">

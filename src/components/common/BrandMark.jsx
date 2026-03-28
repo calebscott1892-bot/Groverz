@@ -2,14 +2,18 @@ import React from 'react';
 
 import { businessDetails } from '@/config/site';
 
-export default function BrandMark({ className = '' }) {
+const logoPath = '/assets/logo.png';
+
+export default function BrandMark({ className = '', imageClassName = '' }) {
   return (
-    <div className={`rounded-md bg-[#b91c1c] px-4 py-2 text-white ${className}`.trim()}>
-      <span className="block text-sm font-bold leading-tight sm:text-base">
-        {businessDetails.brandLines[0]}
-        <br />
-        {businessDetails.brandLines[1]}
-      </span>
+    <div className={className}>
+      <img
+        src={logoPath}
+        alt={businessDetails.name}
+        className={`h-full w-auto object-contain ${imageClassName}`.trim()}
+        loading="eager"
+        decoding="async"
+      />
     </div>
   );
 }
