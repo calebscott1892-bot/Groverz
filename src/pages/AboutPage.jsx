@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ArrowRight,
   Building2,
   Calculator,
   CheckCircle,
@@ -10,57 +11,92 @@ import {
   MessageSquare,
   ShieldCheck,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import PhotoPlaceholder from '@/components/common/PhotoPlaceholder';
+import { Button } from '@/components/ui/button';
 import CallToActionSection from '@/components/sections/CallToActionSection';
 import FaqSection from '@/components/sections/FaqSection';
 import PageHeroSection from '@/components/sections/PageHeroSection';
 import ProcessTimelineSection from '@/components/sections/ProcessTimelineSection';
+import { getPagePath } from '@/config/routes';
 
 const helpCards = [
   {
     icon: Calculator,
     title: 'Personal tax returns',
-    description: 'Individual income tax preparation and lodgement to maximise your refund.',
+    description:
+      'Individual returns prepared with every eligible deduction claimed — not just the obvious ones.',
   },
   {
     icon: Building2,
     title: 'Small business accounting',
-    description: 'Bookkeeping, financial reporting and advisory tailored to your business.',
+    description:
+      'Bookkeeping, reporting and advisory that gives you a clear picture of where your business actually stands.',
   },
   {
     icon: FileText,
-    title: 'BAS & GST help',
-    description: 'Accurate preparation and lodgement of BAS, IAS and GST returns.',
+    title: 'BAS & GST lodgement',
+    description:
+      'Accurate, on-time lodgement so the ATO stays off your back and your cash flow stays predictable.',
   },
   {
     icon: HeartHandshake,
-    title: 'Ongoing support & advice',
-    description: 'Year-round guidance for tax planning, compliance and any questions you have.',
+    title: 'Year-round support',
+    description:
+      "Tax questions don't only come up in July. We're available all year for planning, compliance and advice.",
   },
 ];
 
 const expectations = [
-  { icon: MessageSquare, text: 'Clear communication' },
-  { icon: ShieldCheck, text: 'Practical guidance' },
-  { icon: Clock, text: 'Reliable timelines' },
-  { icon: Handshake, text: 'Straightforward process' },
-  { icon: HeartHandshake, text: 'Professional, respectful service' },
-  { icon: CheckCircle, text: 'No surprises on fees' },
+  { icon: MessageSquare, text: 'Plain-English explanations' },
+  { icon: ShieldCheck, text: 'Advice you can act on' },
+  { icon: Clock, text: 'Deadlines we actually meet' },
+  { icon: Handshake, text: 'No runaround process' },
+  { icon: HeartHandshake, text: 'Respectful, personal service' },
+  { icon: CheckCircle, text: 'Fees agreed upfront' },
 ];
 
 const profileFacts = [
   { label: 'Local base', value: 'East Cannington, WA' },
-  { label: 'Practice', value: 'Independent practice for 5 years' },
-  { label: 'Background', value: 'Curtin University graduate' },
+  { label: 'Practice', value: 'Independent for 5+ years' },
+  { label: 'Education', value: 'Curtin University graduate' },
+];
+
+const aboutFaqs = [
+  {
+    question: 'Who actually does my tax return?',
+    answer:
+      "Ankit personally handles your work. You're not handed off to junior staff or farmed out to a processing centre. The person you talk to is the person who does the work.",
+  },
+  {
+    question: "I've never used an accountant before — is that okay?",
+    answer:
+      "Absolutely. A large portion of our clients come to us after years of doing their own returns through myTax. There's no judgement — we'll walk you through everything and you'll quickly see the difference.",
+  },
+  {
+    question: 'Do I need to come into the office?',
+    answer:
+      "Not if you don't want to. Many clients work with us entirely by phone, email or video call. We're flexible.",
+  },
+  {
+    question: 'What if my tax situation is complicated?',
+    answer:
+      "That's what we're here for. Whether it's multiple income streams, investment properties, trust structures, or catching up on years of overdue returns — we've handled it before.",
+  },
+  {
+    question: 'How quickly will my return be done?',
+    answer:
+      "Most individual returns are prepared and lodged within 3–5 business days of receiving your documents. Business and trust returns depend on complexity, but we'll always give you a clear timeline upfront.",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <div>
       <PageHeroSection
-        title="About Groverz Tax & Accounting Solutions"
-        subtitle="Clear, practical accounting support for individuals and small businesses."
+        title="The person behind the practice"
+        subtitle="A straightforward accountant in East Cannington who'd rather do good work than talk about it."
       />
 
       <section className="bg-white">
@@ -71,7 +107,7 @@ export default function AboutPage() {
 
               <div className="rounded-2xl border border-[#1e1b4b]/10 bg-[#1e1b4b]/[0.03] p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1e1b4b]/60">
-                  What guides the work
+                  How we work
                 </p>
                 <ul className="mt-4 space-y-3">
                   {expectations.slice(0, 3).map(({ text }) => (
@@ -82,8 +118,8 @@ export default function AboutPage() {
                   ))}
                 </ul>
                 <p className="mt-4 border-t border-[#1e1b4b]/10 pt-4 text-sm leading-relaxed text-gray-500">
-                  The aim is to keep tax and accounting support clear, steady and easy to deal with
-                  from the first conversation onward.
+                  Straightforward work, clear communication, and a process that doesn&apos;t waste
+                  your time. That&apos;s the whole idea.
                 </p>
               </div>
             </div>
@@ -93,14 +129,15 @@ export default function AboutPage() {
                 Meet Ankit
               </p>
               <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-                A local practice built on clear advice and dependable follow-through
+                Built on accurate work and honest advice — not marketing slogans
               </h2>
               <p className="mt-3 text-sm font-medium text-[#b91c1c]">
                 Principal / Founder | Registered Tax Agent
               </p>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#1e1b4b]/80">
-                Groverz Tax & Accounting Solutions was founded to give individuals and small
-                businesses practical support without the runaround.
+                I started Groverz because I kept seeing the same problem: people overpaying on tax
+                because their accountant was too busy (or too disinterested) to look properly. I
+                wanted to run a practice where every client gets the attention their return deserves.
               </p>
 
               <div className="mt-10 space-y-8">
@@ -109,44 +146,52 @@ export default function AboutPage() {
                     Background
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-gray-600">
-                    Ankit Grover moved from India to Australia in 2008 and completed his degrees at
-                    Curtin University. He later built his practice in Cannington and has spent the
-                    past decade in the local area.
+                    I moved from India to Perth in 2008, completed my degrees at Curtin University,
+                    and built my practice right here in Cannington. Fifteen-plus years in the area
+                    means I understand the local community — the tradies, the small business owners,
+                    the families juggling rentals and HECS debt.
                   </p>
                 </div>
 
                 <div className="grid gap-8 border-t border-[#1e1b4b]/10 pt-8 md:grid-cols-2">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
-                      Service approach
+                      What makes this different
                     </p>
                     <p className="mt-3 text-base leading-relaxed text-gray-600">
-                      With five years in independent practice, his focus is simple: accurate work,
-                      straightforward communication and advice that helps clients stay organised,
-                      compliant and confident year-round.
+                      With five years running my own practice, the focus hasn&apos;t changed:
+                      accurate work, straight talk, and advice that actually helps you keep more of
+                      what you earn. I don&apos;t upsell services you don&apos;t need.
                     </p>
                   </div>
 
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
-                      Local perspective
+                      Outside the office
                     </p>
                     <p className="mt-3 text-base leading-relaxed text-gray-600">
-                      Outside the office, he enjoys spending time with his family, being outdoors
-                      and making the most of Perth&apos;s rivers and beaches.
+                      When I&apos;m not staring at tax returns, you&apos;ll find me with my family,
+                      somewhere near the river or the beach. Perth&apos;s too good to spend every
+                      weekend indoors.
                     </p>
                   </div>
                 </div>
 
                 <div className="max-w-3xl rounded-2xl border border-[#1e1b4b]/10 bg-[#f8f5ef] p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/55">
-                    Why clients come to us
+                    Who this practice is for
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-gray-600">
-                    The practice is set up for people who want one steady point of contact for tax
-                    returns, business accounting, BAS and ongoing advice, with clear communication
-                    around what is needed next.
+                    If you want one reliable person to handle your tax, bookkeeping and compliance —
+                    someone who picks up the phone and knows your situation without having to look it
+                    up — that&apos;s what I set this up to be.
                   </p>
+                  <Link to={getPagePath('Contact')} className="mt-4 inline-block">
+                    <Button className="h-auto gap-2 bg-[#b91c1c] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#991b1b]">
+                      Start a Conversation
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -158,14 +203,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-12 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Practice Areas
+              What we handle
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
-              Where clients usually need support
+              The work most people come to us for
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              Support is centred on the work most individuals and small businesses need handled
-              properly, on time and with clear advice around it.
+              Everyone&apos;s situation is a bit different, but most of our clients need one or more
+              of these handled properly and on time.
             </p>
           </div>
 
@@ -190,14 +235,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Service Style
+              What to expect
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              How the practice works day to day
+              How things actually work day to day
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              The service approach is built around clear explanations, dependable follow-through and
-              a process that feels straightforward to deal with.
+              No jargon-heavy reports, no chasing for updates. Clear communication and deadlines
+              that get met.
             </p>
           </div>
 
@@ -216,17 +261,18 @@ export default function AboutPage() {
       </section>
 
       <ProcessTimelineSection
-        title="What it's like to work together"
-        description="From the first conversation to ongoing support, we keep the process clear, calm and easy to follow."
+        title="From first contact to ongoing support"
+        description="Here's what the process looks like from your side. No surprises, no waiting in the dark."
       />
       <FaqSection
-        title="Questions we often hear"
-        description="A few of the common questions clients ask before getting started with us."
+        title="Questions people ask before getting started"
+        description="If your question isn't here, just ask — that's literally what the contact page is for."
+        items={aboutFaqs}
       />
       <CallToActionSection
-        title="Need straightforward advice?"
-        description="If you'd like a practical second opinion or help getting organised, get in touch and we'll talk through the best next step."
-        primaryLabel="Talk to Us"
+        title="Curious if we're the right fit?"
+        description="We're happy to have a quick chat — no strings, no sales pitch. Just an honest conversation about whether we can help."
+        primaryLabel="Start a Conversation"
       />
     </div>
   );

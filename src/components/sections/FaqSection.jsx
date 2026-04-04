@@ -11,27 +11,27 @@ const defaultItems = [
   {
     question: 'When is the deadline for lodging my tax return?',
     answer:
-      'If you lodge your own return, the deadline is 31 October. If you use a registered tax agent like us, you may be eligible for an extended deadline. Get in touch and we can advise you.',
+      'If you lodge your own return, the deadline is 31 October. If you use a registered tax agent like us, you may qualify for an extended deadline — but you need to be registered with us before the original due date.',
   },
   {
-    question: 'What do I need to bring to my appointment?',
+    question: 'What do I need to bring?',
     answer:
-      "Your tax file number, photo ID, bank details for your refund, PAYG summary or income statements, and any receipts for deductions you'd like to claim. We'll let you know if we need anything else.",
+      "Your tax file number, photo ID, bank details for your refund, PAYG summary or income statements, and any receipts for deductions. Don't worry if you're missing something — we'll work it out together.",
   },
   {
-    question: 'Do you offer remote or online appointments?',
+    question: 'Can I do everything remotely?',
     answer:
-      'Yes. We can work with you over the phone, by email, or via video call - whatever suits you best.',
+      'Absolutely. Most of our clients work with us by phone, email or video call. You never have to come into the office unless you want to.',
   },
   {
-    question: 'How much does a tax return cost?',
+    question: 'How much does it cost?',
     answer:
-      "Our fees are transparent and fixed. The cost depends on the complexity of your return. We'll provide a clear quote before we begin - no surprises.",
+      "Individual returns start from $80. More complex work (businesses, trusts, SMSF) depends on scope — but we always provide a clear fixed-fee quote before we begin. You'll never be surprised by a bill.",
   },
   {
-    question: 'Can you help with overdue or late tax returns?',
+    question: "I've got overdue returns — can you help?",
     answer:
-      'Absolutely. We regularly help clients catch up on prior-year returns. The sooner you get in touch, the sooner we can help sort things out.',
+      'Yes, and it\'s more common than you think. We\'ll work through them methodically, liaise with the ATO on your behalf, and get you current. The sooner you reach out, the easier it is to sort out.',
   },
 ];
 
@@ -52,17 +52,17 @@ export default function FaqSection({
           )}
         </div>
 
-        <Accordion type="single" collapsible className="space-y-2">
+        <Accordion type="single" collapsible className="space-y-3">
           {items.map(({ question, answer }, index) => (
             <AccordionItem
               key={question}
               value={`faq-${index}`}
-              className="rounded-lg border border-gray-100 px-5"
+              className="rounded-xl border border-gray-100/80 bg-white px-6 shadow-sm transition-all data-[state=open]:border-[#b91c1c]/15 data-[state=open]:shadow-md"
             >
-              <AccordionTrigger className="py-4 text-left text-sm font-semibold text-[#1e1b4b] hover:no-underline">
+              <AccordionTrigger className="py-5 text-left text-sm font-semibold text-[#1e1b4b] hover:no-underline">
                 {question}
               </AccordionTrigger>
-              <AccordionContent className="pb-4 text-sm leading-relaxed text-gray-600">
+              <AccordionContent className="pb-5 text-sm leading-relaxed text-gray-600">
                 {answer}
               </AccordionContent>
             </AccordionItem>

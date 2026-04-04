@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  ArrowRight,
   Award,
   Briefcase,
   Building2,
@@ -11,13 +12,16 @@ import {
   User,
   Users,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import ServiceAccordionCard from '@/components/services/ServiceAccordionCard';
+import { Button } from '@/components/ui/button';
 import CallToActionSection from '@/components/sections/CallToActionSection';
 import FaqSection from '@/components/sections/FaqSection';
 import PageHeroSection from '@/components/sections/PageHeroSection';
 import ProcessTimelineSection from '@/components/sections/ProcessTimelineSection';
 import TaxRefundEstimatorSection from '@/components/sections/TaxRefundEstimatorSection';
+import { getPagePath } from '@/config/routes';
 
 const serviceCategories = [
   { key: 'all', label: 'All services' },
@@ -38,10 +42,11 @@ const serviceItems = [
   {
     icon: Calculator,
     title: 'Personal Tax Returns',
-    description: 'Individual income tax returns prepared and lodged to maximise your refund.',
+    description:
+      'Your refund should reflect what you actually earned and spent — not just the low-hanging deductions.',
     category: 'personal',
     details:
-      "We take the stress out of tax time. Whether you're a PAYG employee, have investment income, or manage rental properties, we'll ensure every allowable deduction is claimed and your return is lodged accurately.",
+      "Whether you're a PAYG employee, have investment income, or manage rental properties, we go through your situation properly — not just run the numbers through a template. The difference usually shows up in your refund.",
     includedItems: [
       'Income tax return preparation and lodgement',
       'Investment property and capital gains tax',
@@ -54,10 +59,11 @@ const serviceItems = [
   {
     icon: Building2,
     title: 'Business Accounting',
-    description: 'Bookkeeping, financial reporting and advisory for small businesses.',
+    description:
+      'Clean books, timely reports, and advice that helps you run your business — not just satisfy the ATO.',
     category: 'business',
     details:
-      'From day-to-day bookkeeping to end-of-year reporting, we keep your financials organised so you can focus on running your business. We work with sole traders, partnerships and companies of all sizes.',
+      "From daily bookkeeping to end-of-year reporting, we keep your financials in order so you can make decisions based on real numbers — not guesswork. We work with sole traders, partnerships and companies at all stages.",
     includedItems: [
       'Bookkeeping and financial reporting',
       'Business structuring and advisory',
@@ -70,10 +76,11 @@ const serviceItems = [
   {
     icon: Scale,
     title: 'Trust & Company Tax',
-    description: 'Tax returns, compliance and structuring for trusts and companies.',
+    description:
+      'Trust and company structures handled properly — distributions, returns, ASIC, the lot.',
     category: 'corporate',
     details:
-      "We handle the complexity of trust and company structures so you don't have to. From annual returns to distribution planning, we ensure your entity stays compliant and tax-efficient.",
+      "Complex structures shouldn't mean a complex experience for you. We handle the annual returns, distribution planning and compliance so your entity stays tax-efficient and the paperwork stays out of your way.",
     includedItems: [
       'Company and trust tax return preparation',
       'Trust distribution planning and minutes',
@@ -86,10 +93,11 @@ const serviceItems = [
   {
     icon: TrendingUp,
     title: 'Tax Planning',
-    description: 'Year-round strategies to legally minimise your tax obligations.',
+    description:
+      'Year-round planning that finds opportunities early — not a last-minute EOFY scramble.',
     category: 'personal',
     details:
-      "Tax planning isn't just something you do at the end of the financial year. We work with you throughout the year to identify opportunities, structure your affairs, and ensure you're not paying more than you need to.",
+      "Good tax planning starts well before June 30. We work with you throughout the year to structure your affairs, time your decisions, and make sure you're not handing over more than you need to.",
     includedItems: [
       'Year-round tax minimisation strategies',
       'Pre and post year-end planning',
@@ -102,10 +110,11 @@ const serviceItems = [
   {
     icon: FileText,
     title: 'BAS, GST & Compliance',
-    description: 'Accurate preparation and lodgement of BAS, IAS and GST returns.',
+    description:
+      'BAS lodged on time, every time. No nasty ATO letters landing in your inbox.',
     category: 'business',
     details:
-      'Stay on top of your obligations with timely and accurate BAS and GST lodgements. We handle the paperwork and keep you informed, so there are no nasty surprises from the ATO.',
+      "Staying on top of BAS and GST obligations means no penalties, no interest charges, and no surprises. We handle the preparation and lodgement and keep you informed about what's coming up.",
     includedItems: [
       'BAS and IAS preparation and lodgement',
       'GST registration and reporting',
@@ -118,10 +127,11 @@ const serviceItems = [
   {
     icon: Award,
     title: 'Self Managed Super Funds',
-    description: 'SMSF administration, tax returns and compliance services.',
+    description:
+      'Your super, your control — but with the compliance and admin handled professionally.',
     category: 'corporate',
     details:
-      'Running your own super fund gives you control, but it comes with responsibilities. We handle the administration, tax returns and compliance so your SMSF stays on track and within the rules.',
+      "Running your own fund gives you control, but the rules are strict and the admin never stops. We handle annual returns, financial statements and compliance so your SMSF stays on the right side of the regulator.",
     includedItems: [
       'SMSF annual tax return preparation',
       'Financial statement preparation',
@@ -135,10 +145,10 @@ const serviceItems = [
     icon: Home,
     title: 'Mortgage Broking',
     description:
-      'Home loan guidance to help you find the right fit, whether buying, refinancing, or investing.',
+      'We match your financial picture to the right loan — whether you\'re buying, refinancing, or investing.',
     category: 'finance',
     details:
-      "Navigating the home loan market can be overwhelming. We help simplify the process by understanding your financial position and matching you with suitable lending options. Whether you're a first home buyer, looking to refinance, or expanding your property portfolio, we're here to guide you through it.",
+      "Because we already know your financial situation, we're in a unique position to find lending options that actually fit. No hard sell, no commission-driven recommendations — just practical guidance through the home loan process.",
     includedItems: [
       'First home buyer support and guidance',
       'Refinancing and loan restructuring',
@@ -151,29 +161,61 @@ const serviceItems = [
 ];
 
 const clientTypes = [
-  { icon: User, title: 'Individuals', description: 'PAYG employees, investors and retirees' },
+  {
+    icon: User,
+    title: 'Individuals',
+    description: 'PAYG workers, investors, retirees',
+  },
   {
     icon: Briefcase,
     title: 'Sole Traders',
-    description: 'Self-employed professionals and tradespeople',
+    description: 'Tradies, freelancers, consultants',
   },
-  { icon: Users, title: 'Partnerships', description: 'Business partnerships of all sizes' },
+  { icon: Users, title: 'Partnerships', description: 'Business partners of all sizes' },
   { icon: Scale, title: 'Trusts', description: 'Family, discretionary and unit trusts' },
-  { icon: Building2, title: 'Companies', description: 'Small businesses and private companies' },
+  { icon: Building2, title: 'Companies', description: 'Small businesses and Pty Ltds' },
 ];
 
 const serviceHighlights = [
   {
-    title: 'Fixed-fee options',
-    description: 'Clear scope and pricing before work begins.',
+    title: 'Fixed fees, quoted upfront',
+    description: "You'll know the cost before any work begins. No hourly billing, no surprises.",
   },
   {
-    title: 'Support across structures',
-    description: 'From individuals and sole traders to trusts and companies.',
+    title: 'All entity types covered',
+    description: 'From a $80 individual return to complex trust and company structures.',
   },
   {
-    title: 'Straightforward guidance',
-    description: 'Practical advice without unnecessary jargon.',
+    title: 'Plain-English guidance',
+    description: "We explain what we're doing and why — in language that makes sense.",
+  },
+];
+
+const serviceFaqs = [
+  {
+    question: 'How much does a tax return cost?',
+    answer:
+      "Individual returns start from $80. Business, trust and company returns depend on complexity. We'll always provide a clear fixed-fee quote before starting — you'll never be surprised by an invoice.",
+  },
+  {
+    question: 'Can I switch to you mid-year?',
+    answer:
+      "Absolutely. We'll coordinate with your previous accountant (or the ATO directly) to make sure we have what we need. The transition is usually smoother than people expect.",
+  },
+  {
+    question: 'How do I send you my documents?',
+    answer:
+      "Whatever's easiest for you. Email, drop them off in person, photograph them on your phone — we're flexible. We'll let you know if we need anything else.",
+  },
+  {
+    question: "I'm a tradie — do you understand my deductions?",
+    answer:
+      "We work with a lot of tradies and sole traders in Perth. We know the deductions that apply to your industry — tools, vehicles, clothing, travel between sites — and we make sure nothing gets missed.",
+  },
+  {
+    question: "I've got a few years of overdue returns. Can you help?",
+    answer:
+      "Yes, and it's more common than you think. We'll work through them methodically, communicate with the ATO on your behalf, and get you back on track. The sooner you start, the easier it is.",
   },
 ];
 
@@ -202,9 +244,9 @@ export default function ServicesPage() {
   return (
     <div>
       <PageHeroSection
-        title="Tax, Accounting & Finance Services"
-        subtitle="Clear, fixed-fee support for individuals, sole traders and business structures across Perth."
-        actionLabel="Discuss Your Needs"
+        title="Services that actually help, not just tick boxes"
+        subtitle="Clear, fixed-fee tax, accounting and finance support for individuals, sole traders and businesses across Perth."
+        actionLabel="Discuss Your Situation"
         actionPageKey="Contact"
       />
 
@@ -212,14 +254,14 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-8 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Service categories
+              Service areas
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              Service areas
+              Open any service to see what&apos;s included
             </h2>
             <p className="mt-3 text-gray-500">
-              Choose a category to narrow the list, then open any service to see what&apos;s
-              included.
+              Filter by category or browse them all. Every service comes with a fixed-fee quote
+              before work begins.
             </p>
           </div>
 
@@ -273,14 +315,14 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Client fit
+              Who we help
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              Who we help
+              From simple returns to complex structures
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              We work with clients at different stages, from individual returns through to more
-              complex business and entity structures.
+              Whether you&apos;re a nurse claiming uniform deductions or a business owner with
+              multiple entities, the process is the same — clear, organised and stress-free.
             </p>
           </div>
 
@@ -306,24 +348,36 @@ export default function ServicesPage() {
           <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
             Pricing
           </p>
-          <h3 className="mb-3 text-xl font-bold text-[#1e1b4b]">Transparent fixed-fee pricing</h3>
+          <h3 className="mb-3 text-xl font-bold text-[#1e1b4b]">
+            You&apos;ll know the price before we start
+          </h3>
           <p className="leading-relaxed text-gray-600">
-            We provide fixed-fee options depending on your needs. You&apos;ll always know the cost
-            and scope upfront before we begin - no hourly billing, no hidden charges.
+            We quote a fixed fee based on your situation — not hours worked. No surprises, no
+            creeping invoices, no awkward conversations after the fact.
           </p>
+          <Link to={getPagePath('Contact')} className="mt-6 inline-block">
+            <Button className="h-auto gap-2 bg-[#b91c1c] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#991b1b]">
+              Get a Quote
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
-      <ProcessTimelineSection description="Once you reach out, we keep the next steps clear so you know what to expect at each stage." />
+      <ProcessTimelineSection
+        title="What happens after you reach out"
+        description="You'll know exactly what's happening at each stage. No guessing, no waiting in the dark."
+      />
       <TaxRefundEstimatorSection />
       <FaqSection
         title="Service questions"
-        description="A few common questions about scope, timing and how we usually work with new clients."
+        description="Common questions about scope, pricing and how we work with new clients."
+        items={serviceFaqs}
       />
       <CallToActionSection
         title="Not sure which service fits?"
-        description="Tell us a little about your situation and we'll point you to the right starting point before any work begins."
-        primaryLabel="Ask About Services"
+        description="Tell us a bit about your situation and we'll point you in the right direction — before any work begins or fees apply."
+        primaryLabel="Ask Us Anything"
       />
     </div>
   );

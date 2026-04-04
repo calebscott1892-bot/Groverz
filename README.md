@@ -35,8 +35,8 @@ Frontend codebase for the Groverz Tax and Accounting Solutions website.
 ## Build Output
 
 - Production files are generated into `dist/`
-- No environment variables are currently required for local development or deployment
-- The contact form uses Netlify Forms when deployed on Netlify
+- The contact form posts to `/api/contact`
+- Server-side email delivery requires Resend environment variables in development and production
 
 ## Deployment
 
@@ -44,17 +44,27 @@ This project is a static Vite single-page app with client-side routing. The best
 
 - Build command: `npm run build`
 - Publish directory: `dist`
-- SPA route handling is included via `public/_redirects`
-- The enquiry form is configured for Netlify Forms with a static detection form in `index.html`
+- Functions directory: `netlify/functions`
+- SPA route handling and the `/api/contact` redirect are configured in `netlify.toml`
 
 If you deploy elsewhere, configure a rewrite so all non-file routes fall back to `/index.html`.
+
+## Email Setup (Resend)
+
+1. Install dependencies with `npm install`.
+2. Create `.env.local` from `.env.example` and set `RESEND_API_KEY` to your real Resend API key.
+3. Leave `CONTACT_FROM_EMAIL=onboarding@resend.dev` until your sending domain is verified in Resend.
+4. In the Resend dashboard, verify `groverztax.com.au` and add the DNS records Resend provides.
+5. After domain verification is complete, change `CONTACT_FROM_EMAIL` to `noreply@groverztax.com.au` locally and in your production environment.
+6. In Netlify production, add the same environment variables in Site settings so the contact function can access them server-side.
+
+The contact form sends a JSON request from the React app to `/api/contact`. In local development, Vite serves that endpoint through middleware. In production, Netlify rewrites the same path to the serverless function in `netlify/functions/contact.js`. The server validates and sanitizes the submission, applies a basic rate limit, and sends a structured email through Resend to `ankit@groverztax.com.au`.
 
 ## Notes
 
 - The homepage is the current visual reference for the site.
 - The project is being cleaned up for direct ownership and a normal Git-based workflow.
-- No environment variables are currently required.
-- Netlify form submissions should be tested on a Netlify deploy preview or production deploy, not only in local Vite development.
+- Resend delivery requires valid environment variables in both local and production environments.
 
 ## Pre-Launch Checks
 

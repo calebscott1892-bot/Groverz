@@ -15,12 +15,10 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { businessDetails } from '@/config/site';
 
-const contactFormName = 'contact-enquiry';
-
 const contactCards = [
   {
     icon: MapPin,
-    title: 'Office location',
+    title: 'Visit us',
     content: businessDetails.address.lineOne,
     secondary: businessDetails.address.lineTwo,
     href: businessDetails.address.mapHref,
@@ -28,7 +26,7 @@ const contactCards = [
   },
   {
     icon: Phone,
-    title: 'Phone',
+    title: 'Call Ankit',
     content: businessDetails.phones.primary.display,
     secondaryHref: businessDetails.phones.secondary.href,
     secondary: businessDetails.phones.secondary.display,
@@ -36,13 +34,13 @@ const contactCards = [
   },
   {
     icon: Mail,
-    title: 'Email',
+    title: 'Email us',
     content: businessDetails.email,
     href: businessDetails.emailHref,
   },
   {
     icon: Clock,
-    title: 'Business hours',
+    title: 'Office hours',
     content: businessDetails.hours.weekdays,
     secondary: businessDetails.hours.saturday,
   },
@@ -55,7 +53,8 @@ const serviceOptions = [
   { value: 'bas_gst', label: 'BAS / GST Lodgement' },
   { value: 'smsf', label: 'Self Managed Super Fund' },
   { value: 'trust_company', label: 'Trust or Company Tax' },
-  { value: 'other', label: 'Other / General Enquiry' },
+  { value: 'mortgage', label: 'Mortgage Broking' },
+  { value: 'other', label: 'Something Else / Not Sure' },
 ];
 
 const initialFormState = {
@@ -66,12 +65,6 @@ const initialFormState = {
   message: '',
   botField: '',
 };
-
-function encodeFormData(formData) {
-  return new URLSearchParams(
-    Array.from(formData.entries()).map(([key, value]) => [key, String(value)])
-  ).toString();
-}
 
 export default function ContactPage() {
   const [formState, setFormState] = useState(initialFormState);
@@ -95,36 +88,49 @@ export default function ContactPage() {
       return;
     }
 
-    if (formState.botField) {
-      setSubmitStatus('success');
-      return;
-    }
-
     setSubmitStatus('submitting');
     setSubmitError('');
 
-    const formData = new FormData(event.currentTarget);
-    formData.set('service', selectedServiceLabel);
-
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-        body: encodeFormData(formData),
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          phone: formState.phone,
+          service: selectedServiceLabel,
+          message: formState.message,
+          botField: formState.botField,
+        }),
       });
 
+      let responseBody = null;
+
+      try {
+        responseBody = await response.json();
+      } catch {
+        responseBody = null;
+      }
+
       if (!response.ok) {
-        throw new Error('Form submission failed');
+        throw new Error(
+          responseBody?.error ??
+            "Something went wrong sending your enquiry. Try again, or just call or email us directly — we're happy to hear from you either way."
+        );
       }
 
       setSubmitStatus('success');
       setFormState(initialFormState);
-    } catch (_error) {
+    } catch (error) {
       setSubmitStatus('error');
       setSubmitError(
-        "We couldn't send your enquiry just now. Please try again, or call or email us directly."
+        error instanceof Error
+          ? error.message
+          : "Something went wrong sending your enquiry. Try again, or just call or email us directly — we're happy to hear from you either way."
       );
     }
   }
@@ -138,22 +144,22 @@ export default function ContactPage() {
   return (
     <div>
       <PageHeroSection
-        title="Get in touch"
-        subtitle="Talk through your tax, accounting or finance needs and we'll point you in the right direction."
+        title="Let's talk about your situation"
+        subtitle="No sales pitch, no obligation. Just a practical conversation about what you need and how we can help."
       />
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
-              Contact options
+              Get in touch
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-[#1e1b4b] sm:text-3xl">
-              Choose the easiest way to get in touch
+              Pick whichever way suits you best
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-500">
-              If you already know what you need, the enquiry form is a good place to start.
-              Otherwise, call or email us directly.
+              Fill in the form, send an email, or just call. Most enquiries get a response within a
+              few hours during business hours.
             </p>
           </div>
 
@@ -214,18 +220,18 @@ export default function ContactPage() {
                     Online enquiry
                   </p>
                   <h2 className="text-2xl font-bold text-[#1e1b4b]">
-                    Tell us what you need help with
+                    Tell us what&apos;s going on
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-500">
-                    Use the form below for tax, accounting or finance enquiries. Keep it brief if
-                    you like, just enough for us to understand the next step.
+                    Keep it brief — even just a sentence is enough for us to understand what you
+                    need and get back to you with next steps.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <span className="rounded-full border border-[#1e1b4b]/10 bg-[#f8f5ef] px-3 py-1 text-xs font-medium text-[#1e1b4b]">
                       {businessDetails.registrationLabel}
                     </span>
                     <span className="rounded-full border border-[#1e1b4b]/10 bg-white px-3 py-1 text-xs font-medium text-gray-500">
-                      Fields marked * are required
+                      * = required
                     </span>
                   </div>
                 </div>
@@ -235,10 +241,12 @@ export default function ContactPage() {
                     <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
                       <CheckCircle className="h-7 w-7 text-green-600" />
                     </div>
-                    <h3 className="mb-2 text-xl font-semibold text-[#1e1b4b]">Thank you</h3>
+                    <h3 className="mb-2 text-xl font-semibold text-[#1e1b4b]">
+                      Got it — we&apos;ll be in touch soon
+                    </h3>
                     <p className="text-sm text-gray-500">
-                      Your enquiry has been sent successfully. We&apos;ll be in touch as soon as we
-                      can.
+                      We typically respond within a few hours during business hours. If it&apos;s
+                      urgent, feel free to call directly.
                     </p>
                     <Button
                       type="button"
@@ -249,147 +257,137 @@ export default function ContactPage() {
                     </Button>
                   </div>
                 ) : (
-                  <form
-                    name={contactFormName}
-                    method="POST"
-                    action="/"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
-                    onSubmit={handleSubmit}
-                    className="space-y-5 pt-6"
-                  >
-                    <input type="hidden" name="form-name" value={contactFormName} />
-                    <input type="hidden" name="service" value={selectedServiceLabel} />
-
-                    <div className="hidden">
-                      <Label htmlFor="bot-field">Leave this field blank</Label>
-                      <Input
-                        id="bot-field"
-                        name="bot-field"
-                        autoComplete="off"
-                        tabIndex={-1}
-                        value={formState.botField}
-                        onChange={(event) => handleFieldChange('botField', event.target.value)}
-                      />
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-1.5">
-                        <Label htmlFor="name" className="text-sm">
-                          Full name *
-                        </Label>
+                  <form onSubmit={handleSubmit} className="pt-6">
+                    <fieldset disabled={submitStatus === 'submitting'} className="space-y-5">
+                      <div className="hidden">
+                        <Label htmlFor="bot-field">Leave this field blank</Label>
                         <Input
-                          id="name"
-                          name="name"
+                          id="bot-field"
+                          name="bot-field"
+                          autoComplete="off"
+                          tabIndex={-1}
+                          value={formState.botField}
+                          onChange={(event) => handleFieldChange('botField', event.target.value)}
+                        />
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-1.5">
+                          <Label htmlFor="name" className="text-sm">
+                            Your name *
+                          </Label>
+                          <Input
+                            id="name"
+                            name="name"
+                            required
+                            autoComplete="name"
+                            placeholder="First and last name"
+                            value={formState.name}
+                            onChange={(event) => handleFieldChange('name', event.target.value)}
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <Label htmlFor="email" className="text-sm">
+                            Email *
+                          </Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            autoComplete="email"
+                            placeholder="you@example.com"
+                            value={formState.email}
+                            onChange={(event) => handleFieldChange('email', event.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-1.5">
+                          <Label htmlFor="phone" className="text-sm">
+                            Phone (optional)
+                          </Label>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            autoComplete="tel"
+                            inputMode="tel"
+                            pattern="[\d\s\+\-\(\)]{6,20}"
+                            placeholder="04XX XXX XXX"
+                            value={formState.phone}
+                            onChange={(event) => handleFieldChange('phone', event.target.value)}
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <Label htmlFor="service" className="text-sm">
+                            What do you need help with?
+                          </Label>
+                          <Select
+                            value={formState.service}
+                            onValueChange={(value) => handleFieldChange('service', value)}
+                          >
+                            <SelectTrigger id="service">
+                              <SelectValue placeholder="Select a service" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {serviceOptions.map(({ value, label }) => (
+                                <SelectItem key={value} value={value}>
+                                  {label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <Label htmlFor="message" className="text-sm">
+                          Anything else we should know? *
+                        </Label>
+                        <Textarea
+                          id="message"
+                          name="message"
                           required
-                          autoComplete="name"
-                          placeholder="Your full name"
-                          value={formState.name}
-                          onChange={(event) => handleFieldChange('name', event.target.value)}
+                          placeholder="Even a sentence or two is fine — e.g. 'I need my 2025 tax return done' or 'I'm a sole trader and need BAS help'"
+                          className="min-h-[110px] resize-none"
+                          value={formState.message}
+                          onChange={(event) => handleFieldChange('message', event.target.value)}
                         />
                       </div>
 
-                      <div className="space-y-1.5">
-                        <Label htmlFor="email" className="text-sm">
-                          Email address *
-                        </Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          required
-                          autoComplete="email"
-                          placeholder="you@example.com"
-                          value={formState.email}
-                          onChange={(event) => handleFieldChange('email', event.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-1.5">
-                        <Label htmlFor="phone" className="text-sm">
-                          Phone number (optional)
-                        </Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          autoComplete="tel"
-                          inputMode="tel"
-                          placeholder="04XX XXX XXX"
-                          value={formState.phone}
-                          onChange={(event) => handleFieldChange('phone', event.target.value)}
-                        />
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <Label htmlFor="service" className="text-sm">
-                          Service area (optional)
-                        </Label>
-                        <Select
-                          value={formState.service}
-                          onValueChange={(value) => handleFieldChange('service', value)}
-                        >
-                          <SelectTrigger id="service">
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {serviceOptions.map(({ value, label }) => (
-                              <SelectItem key={value} value={value}>
-                                {label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <Label htmlFor="message" className="text-sm">
-                        How can we help? *
-                      </Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        placeholder="Briefly tell us what you need help with"
-                        className="min-h-[110px] resize-none"
-                        value={formState.message}
-                        onChange={(event) => handleFieldChange('message', event.target.value)}
-                      />
-                    </div>
-
-                    <div className="rounded-xl border border-[#1e1b4b]/10 bg-[#f8f5ef] px-4 py-4">
-                      <p className="text-sm font-medium text-[#1e1b4b]">Helpful to include</p>
-                      <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
-                        A short outline of what you need help with, plus your phone number if
-                        you&apos;d prefer a callback.
-                      </p>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={submitStatus === 'submitting'}
-                      className="h-auto w-full gap-2 bg-[#b91c1c] px-7 py-2.5 font-semibold text-white hover:bg-[#991b1b] sm:w-auto"
-                    >
-                      <Send className="h-4 w-4" />
-                      {submitStatus === 'submitting' ? 'Sending...' : 'Send Enquiry'}
-                    </Button>
-
-                    {submitError && (
-                      <div
-                        className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                        role="alert"
+                      <Button
+                        type="submit"
+                        disabled={submitStatus === 'submitting'}
+                        className="h-auto w-full gap-2 bg-[#b91c1c] px-7 py-2.5 font-semibold text-white hover:bg-[#991b1b] sm:w-auto"
                       >
-                        {submitError}
-                      </div>
-                    )}
+                        <Send className="h-4 w-4" />
+                        {submitStatus === 'submitting' ? 'Sending...' : 'Send Enquiry'}
+                      </Button>
 
-                    <p className="text-xs leading-relaxed text-gray-500">
-                      If you&apos;d prefer to speak first, call or email us directly using the
-                      details on this page.
-                    </p>
+                      {submitError && (
+                        <div
+                          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                          role="alert"
+                        >
+                          {submitError}
+                        </div>
+                      )}
+
+                      <p className="text-xs leading-relaxed text-gray-500">
+                        Prefer a conversation first? Call{' '}
+                        <a
+                          href={businessDetails.phones.primary.href}
+                          className="font-medium text-[#b91c1c]"
+                        >
+                          {businessDetails.phones.primary.display}
+                        </a>{' '}
+                        during business hours.
+                      </p>
+                    </fieldset>
                   </form>
                 )}
               </div>
@@ -399,20 +397,21 @@ export default function ContactPage() {
               <div className="overflow-hidden rounded-2xl border border-[#1e1b4b]/10 bg-white shadow-sm">
                 <iframe
                   title="Groverz Tax Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3385.8!2d115.96!3d-32.0!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDAw!5e0!3m2!1sen!2sau!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1692.9!2d115.9570842!3d-32.0067333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32be9aecbb0d71%3A0x5b8f5ead2673ef15!2s108%20Gerard%20St%2C%20East%20Cannington%20WA%206107!5e0!3m2!1sen!2sau!4v1"
                   width="100%"
                   height="220"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
+                  sandbox="allow-scripts allow-same-origin"
                   className="w-full"
                 />
                 <div className="flex items-start gap-3 px-5 py-4">
                   <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#b91c1c]" />
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/50">
-                      Office location
+                      Office
                     </p>
                     <p className="mt-2 text-sm font-medium text-[#1e1b4b]">
                       {businessDetails.address.lineOne}
@@ -436,10 +435,12 @@ export default function ContactPage() {
                 <span className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white/85">
                   {businessDetails.registrationLabel}
                 </span>
-                <h3 className="mt-4 text-lg font-semibold text-white">Prefer to speak first?</h3>
+                <h3 className="mt-4 text-lg font-semibold text-white">
+                  Rather just pick up the phone?
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/70">
-                  Call or email if you&apos;d like a direct conversation before sending through the
-                  details of your enquiry.
+                  Ankit answers directly during business hours. No receptionist, no hold music, no
+                  &quot;someone will call you back.&quot;
                 </p>
                 <div className="mt-5 space-y-3">
                   <a
@@ -470,7 +471,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-5 border-t border-white/10 pt-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">
-                    Business hours
+                    Hours
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-white/80">
                     {businessDetails.hours.weekdays}
@@ -478,6 +479,14 @@ export default function ContactPage() {
                     {businessDetails.hours.saturday}
                   </p>
                 </div>
+              </div>
+
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                <p className="text-sm font-semibold text-amber-900">Tax deadline coming up?</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-amber-800">
+                  If your return is overdue or a deadline is close, mention it in your enquiry and
+                  we&apos;ll prioritise getting back to you.
+                </p>
               </div>
             </div>
           </div>
@@ -487,11 +496,11 @@ export default function ContactPage() {
       <section className="section-navy py-12 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Start with the contact method that feels easiest
+            However you reach out, the first step is easy
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-lg leading-relaxed text-white/60">
-            Whether you send an enquiry, call or email, the aim is to make the first step clear and
-            straightforward.
+            No commitment, no pressure. Just a straightforward conversation about what you need and
+            whether we&apos;re the right fit.
           </p>
         </div>
       </section>

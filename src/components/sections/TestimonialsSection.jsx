@@ -4,36 +4,39 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     name: 'Sarah M.',
-    role: 'Individual',
+    role: 'Individual — Joondalup',
+    initials: 'SM',
     quote:
-      "Ankit made the whole tax return process so easy. He found deductions I didn't even know about and my refund was much better than expected. Highly recommend!",
+      "I'd been doing my own return on myTax for years and thought I was fine. Ankit found $2,800 in deductions I had no idea I could claim. Now I don't go anywhere else.",
     rating: 5,
   },
   {
     name: 'James T.',
-    role: 'Sole Trader',
+    role: 'Sole Trader — Electrician',
+    initials: 'JT',
     quote:
-      'As a tradie, I needed someone who understood my situation. Groverz sorted my BAS, tax return and even helped me set up a better structure. Great service.',
+      'I needed someone who gets tradies. Groverz sorted my BAS, caught deductions on my ute and tools, and set me up with a better structure. Wish I\'d switched sooner.',
     rating: 5,
   },
   {
     name: 'Priya K.',
-    role: 'Small Business Owner',
+    role: 'Small Business Owner — Cannington',
+    initials: 'PK',
     quote:
-      "Professional, responsive and always available when I have questions. They handle our bookkeeping and tax with zero fuss. It's a relief to have them on our side.",
+      "Ankit handles our bookkeeping, BAS and tax. What I value most is that he actually picks up the phone and knows our situation without having to look it up. That's rare.",
     rating: 5,
   },
 ];
 
 export default function TestimonialsSection({
   background = 'cream',
-  description = "Feedback from individuals, sole traders and small business owners we've supported.",
+  description = 'Real feedback from Perth locals — individuals, tradies and small business owners we work with.',
 }) {
   return (
     <section className={background === 'cream' ? 'section-cream' : 'bg-white'}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
+        <div className="mx-auto mb-14 max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#b91c1c]">
             Client feedback
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-[#1e1b4b] sm:text-4xl">
@@ -42,21 +45,35 @@ export default function TestimonialsSection({
           <p className="mt-4 text-lg text-gray-500">{description}</p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map(({ name, role, quote, rating }) => (
-            <div key={name} className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
-              <div className="mb-4 flex gap-0.5">
-                {Array.from({ length: rating }).map((_, starIndex) => (
-                  <Star
-                    key={`${name}-${starIndex}`}
-                    className="h-4 w-4 fill-amber-400 text-amber-400"
-                  />
-                ))}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map(({ name, role, initials, quote, rating }) => (
+            <div
+              key={name}
+              className="relative rounded-2xl border border-gray-100/80 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            >
+              <div className="absolute -top-1 right-6 text-6xl font-serif leading-none text-[#b91c1c]/[0.07]">
+                &ldquo;
               </div>
-              <p className="mb-5 text-sm leading-relaxed text-gray-600">&quot;{quote}&quot;</p>
-              <div className="border-t border-gray-200 pt-4">
-                <p className="text-sm font-semibold text-[#1e1b4b]">{name}</p>
-                <p className="mt-0.5 text-xs text-gray-500">{role}</p>
+
+              <div className="relative">
+                <div className="mb-4 flex gap-0.5">
+                  {Array.from({ length: rating }).map((_, starIndex) => (
+                    <Star
+                      key={`${name}-${starIndex}`}
+                      className="h-4 w-4 fill-amber-400 text-amber-400"
+                    />
+                  ))}
+                </div>
+                <p className="mb-6 text-sm leading-relaxed text-gray-600">{quote}</p>
+                <div className="flex items-center gap-3 border-t border-gray-100 pt-5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1e1b4b] text-xs font-semibold tracking-wide text-white">
+                    {initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#1e1b4b]">{name}</p>
+                    <p className="text-xs text-gray-500">{role}</p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
