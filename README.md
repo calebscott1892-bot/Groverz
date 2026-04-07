@@ -40,14 +40,20 @@ Frontend codebase for the Groverz Tax and Accounting Solutions website.
 
 ## Deployment
 
-This project is a static Vite single-page app with client-side routing. The best fit is Netlify:
+This project is a static Vite single-page app with client-side routing and a single serverless contact endpoint. It is now ready for Vercel deployment:
 
 - Build command: `npm run build`
-- Publish directory: `dist`
-- Functions directory: `netlify/functions`
-- SPA route handling and the `/api/contact` redirect are configured in `netlify.toml`
+- Output directory: `dist`
+- Vercel project root: repository root
+- The SPA fallback is configured in `vercel.json`
+- Contact form submissions are handled by `api/contact.js`
 
-If you deploy elsewhere, configure a rewrite so all non-file routes fall back to `/index.html`.
+In Vercel, add these environment variables to every environment that should send email:
+
+- `RESEND_API_KEY`
+- `CONTACT_FROM_EMAIL`
+
+If you deploy elsewhere, configure a rewrite so all non-file routes fall back to `/index.html` and map `/api/contact` to a compatible serverless function.
 
 ## Email Setup (Resend)
 
@@ -56,9 +62,9 @@ If you deploy elsewhere, configure a rewrite so all non-file routes fall back to
 3. Leave `CONTACT_FROM_EMAIL=onboarding@resend.dev` until your sending domain is verified in Resend.
 4. In the Resend dashboard, verify `groverztax.com.au` and add the DNS records Resend provides.
 5. After domain verification is complete, change `CONTACT_FROM_EMAIL` to `noreply@groverztax.com.au` locally and in your production environment.
-6. In Netlify production, add the same environment variables in Site settings so the contact function can access them server-side.
+6. In Vercel project settings, add the same environment variables so the contact function can access them server-side.
 
-The contact form sends a JSON request from the React app to `/api/contact`. In local development, Vite serves that endpoint through middleware. In production, Netlify rewrites the same path to the serverless function in `netlify/functions/contact.js`. The server validates and sanitizes the submission, applies a basic rate limit, and sends a structured email through Resend to `ankit@groverztax.com.au`.
+The contact form sends a JSON request from the React app to `/api/contact`. In local development, Vite serves that endpoint through middleware. In production on Vercel, the same path is handled by `api/contact.js`. The server validates and sanitizes the submission, applies a basic rate limit, and sends a structured email through Resend to `ankit@groverztax.com.au`.
 
 ## Notes
 
