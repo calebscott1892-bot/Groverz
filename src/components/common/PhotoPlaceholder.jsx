@@ -33,7 +33,7 @@ export default function PhotoPlaceholder({
             <div className="absolute -right-10 -top-12 h-40 w-40 rounded-full border border-white" />
             <div className="absolute -bottom-10 -left-8 h-28 w-28 rounded-full border border-white" />
           </div>
-          <div className="relative flex min-h-[220px] items-end rounded-[20px] border border-white/10 bg-white/5 p-6">
+          <div className="relative flex min-h-[160px] items-end rounded-[20px] border border-white/10 bg-white/5 p-6 sm:min-h-[220px]">
             <div className="absolute right-6 top-5 text-7xl font-semibold tracking-tight text-white/10">
               {initials}
             </div>

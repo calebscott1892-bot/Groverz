@@ -76,7 +76,7 @@ export default function TaxRefundEstimatorSection() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="rounded-xl bg-gradient-to-br from-[#1e1b4b] to-[#312e81] p-6 sm:p-10 lg:p-12">
           <div className="grid items-start gap-10 lg:grid-cols-2">
-            <div>
+            <div className="order-2 lg:order-1">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
                   <Calculator className="h-5 w-5 text-white" />
@@ -133,7 +133,7 @@ export default function TaxRefundEstimatorSection() {
               )}
             </div>
 
-            <div className="rounded-xl bg-white p-6 sm:p-8">
+            <div className="order-1 rounded-xl bg-white p-6 sm:p-8 lg:order-2">
               <form onSubmit={handleEstimateSubmit} className="space-y-5">
                 <div className="space-y-1.5">
                   <Label htmlFor="est-income" className="text-sm text-[#1e1b4b]">

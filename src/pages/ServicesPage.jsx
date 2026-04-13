@@ -274,13 +274,13 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          <div className="mb-10 flex flex-wrap justify-center gap-2">
+          <div className="mb-10 flex justify-center gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-x-visible sm:pb-0">
             {serviceCategories.map(({ key, label }) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => handleCategoryChange(key)}
-                className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+                className={`flex-shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-colors ${
                   activeCategory === key
                     ? 'bg-[#1e1b4b] text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

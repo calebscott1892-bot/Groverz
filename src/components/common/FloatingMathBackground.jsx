@@ -41,8 +41,16 @@ export default function FloatingMathBackground({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    /* Skip animation entirely if user prefers reduced motion */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
+
+    /* Halve particle count on narrow screens for performance */
+    const effectiveCount = window.innerWidth < 768 ? Math.ceil(count / 2) : count;
+
     let w = 0;
     let h = 0;
     let raf;
@@ -75,7 +83,7 @@ export default function FloatingMathBackground({
       const rand = seededRandom(seed);
       const particles = [];
 
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < effectiveCount; i++) {
         const symbol = SYMBOLS[Math.floor(rand() * SYMBOLS.length)];
         const isWord = symbol.length > 1;
         const fontSize = isWord ? 12 + rand() * 8 : 16 + rand() * 28;

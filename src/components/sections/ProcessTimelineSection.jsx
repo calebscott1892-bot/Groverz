@@ -47,8 +47,8 @@ export default function ProcessTimelineSection({
                 {index % 2 === 0 ? (
                   <>
                     <div className="hidden lg:block" />
-                    <div className="relative pl-16 lg:pl-12">
-                      <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#b91c1c]/20 bg-white text-sm font-bold text-[#b91c1c] shadow-sm lg:left-[-30px]">
+                    <div className="relative pl-14 sm:pl-16 lg:pl-12">
+                      <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#b91c1c]/20 bg-white text-sm font-bold text-[#b91c1c] shadow-sm sm:h-12 sm:w-12 lg:left-[-30px]">
                         {number}
                       </div>
                       <div className="rounded-2xl border border-gray-100/80 bg-white p-6 shadow-sm">
@@ -59,8 +59,8 @@ export default function ProcessTimelineSection({
                   </>
                 ) : (
                   <>
-                    <div className="relative pl-16 lg:pl-0 lg:pr-12 lg:text-right">
-                      <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#b91c1c]/20 bg-white text-sm font-bold text-[#b91c1c] shadow-sm lg:left-auto lg:right-[-30px]">
+                    <div className="relative pl-14 sm:pl-16 lg:pl-0 lg:pr-12 lg:text-right">
+                      <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#b91c1c]/20 bg-white text-sm font-bold text-[#b91c1c] shadow-sm sm:h-12 sm:w-12 lg:left-auto lg:right-[-30px]">
                         {number}
                       </div>
                       <div className="rounded-2xl border border-gray-100/80 bg-white p-6 shadow-sm">

@@ -12,6 +12,16 @@ export default function SiteHeader({ activePageKey }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
 
+  /* ── Lock body scroll when mobile menu is open ── */
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   /* ── Liquid-glass hover tracker ── */
   const navRef = useRef(null);
   const [hoveredRect, setHoveredRect] = useState(null);
@@ -165,15 +175,24 @@ export default function SiteHeader({ activePageKey }) {
           </Link>
         </div>
 
-        <button
-          type="button"
-          className="p-2 text-white md:hidden"
-          aria-expanded={isMobileMenuOpen}
-          aria-label="Toggle navigation menu"
-          onClick={() => setIsMobileMenuOpen((currentState) => !currentState)}
-        >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <a
+            href={businessDetails.phones.primary.href}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/80 transition-colors hover:text-white"
+            aria-label="Call us"
+          >
+            <Phone className="h-4 w-4" />
+          </a>
+          <button
+            type="button"
+            className="p-2 text-white"
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle navigation menu"
+            onClick={() => setIsMobileMenuOpen((currentState) => !currentState)}
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {isMobileMenuOpen && (

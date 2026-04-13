@@ -49,7 +49,7 @@ export default function TestimonialsSection({
           {testimonials.map(({ name, role, initials, quote, rating }) => (
             <div
               key={name}
-              className="relative rounded-2xl border border-gray-100/80 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              className="relative rounded-2xl border border-gray-100/80 bg-white p-7 shadow-sm transition-all duration-300 md:hover:-translate-y-1 md:hover:shadow-md"
             >
               <div className="absolute -top-1 right-6 text-6xl font-serif leading-none text-[#b91c1c]/[0.07]">
                 &ldquo;

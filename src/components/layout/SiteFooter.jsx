@@ -38,12 +38,12 @@ export default function SiteFooter() {
             <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/65">
               Quick links
             </h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-0.5">
               {primaryNavItems.map(({ label, pageKey }) => (
                 <li key={pageKey}>
                   <Link
                     to={getPagePath(pageKey)}
-                    className="inline-flex rounded-md px-0 py-1 text-sm text-white/60 transition-all hover:translate-x-1 hover:text-white"
+                    className="inline-flex min-h-[44px] items-center rounded-md px-0 py-2 text-sm text-white/60 transition-all hover:translate-x-1 hover:text-white"
                   >
                     {label}
                   </Link>
@@ -56,12 +56,12 @@ export default function SiteFooter() {
             <h4 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/65">
               Services
             </h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-0.5">
               {footerServiceLinks.map((serviceLabel) => (
                 <li key={serviceLabel}>
                   <Link
                     to={getPagePath('Services')}
-                    className="inline-flex rounded-md px-0 py-1 text-sm text-white/60 transition-all hover:translate-x-1 hover:text-white"
+                    className="inline-flex min-h-[44px] items-center rounded-md px-0 py-2 text-sm text-white/60 transition-all hover:translate-x-1 hover:text-white"
                   >
                     {serviceLabel}
                   </Link>
@@ -126,6 +126,24 @@ export default function SiteFooter() {
         </div>
       </div>
 
+      {/* ── C4 Studios credit ── */}
+      <div className="relative border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <span className="text-[11px] font-medium tracking-widest text-white/30 uppercase">Designed &amp; built by</span>
+            <C4FooterCredit
+              href="https://c4studios.com"
+              label="Designed by C4 Studios"
+              size="large"
+              showText={true}
+              openInNewTab={true}
+              colorScheme="dark"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ── Acknowledgement & copyright ── */}
       <div className="relative border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <p className="text-center text-xs leading-relaxed text-white/40">
@@ -138,16 +156,6 @@ export default function SiteFooter() {
             <p className="text-xs text-white/35">
               Copyright {new Date().getFullYear()} {businessDetails.name}
             </p>
-            <div className="flex items-center gap-2 text-white/35">
-              <span className="text-[10px] tracking-wide">Designed by</span>
-              <C4FooterCredit
-                href="https://c4studios.com"
-                label="Designed by C4 Studios"
-                size={36}
-                showText={false}
-                openInNewTab={true}
-              />
-            </div>
             <p className="text-xs text-white/35">{businessDetails.footerMeta}</p>
           </div>
         </div>

@@ -92,7 +92,7 @@ const trustMarkers = [
 ];
 
 const homepageStats = [
-  { value: '500+', label: 'Returns Lodged' },
+  { value: '5,000+', label: 'Returns Lodged' },
   { value: '$80', label: 'Individual Returns From' },
   { value: '5★', label: 'Google Reviews' },
   { value: '100%', label: 'ATO Compliant' },
@@ -130,7 +130,7 @@ export default function HomePage() {
         <div className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90">
             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-            Trusted by 500+ Perth locals
+            Trusted by 5,000+ Perth locals
           </p>
           <h1 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             Your tax return shouldn&apos;t be the thing keeping you up at night
@@ -141,8 +141,8 @@ export default function HomePage() {
             turnaround. No runaround.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link to={getPagePath('Contact')}>
-              <Button className="h-auto gap-2 bg-[#b91c1c] px-8 py-3.5 text-base font-semibold text-white hover:bg-[#991b1b]">
+            <Link to={getPagePath('Contact')} className="w-full sm:w-auto">
+              <Button className="h-auto w-full gap-2 bg-[#b91c1c] px-8 py-3.5 text-base font-semibold text-white hover:bg-[#991b1b] sm:w-auto">
                 Book a Free Consultation
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -160,7 +160,7 @@ export default function HomePage() {
 
       <section className="border-b border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
             {homepageStats.map(({ value, label }, index) => (
               <div key={label} className="relative text-center">
                 {index > 0 && (
@@ -199,7 +199,7 @@ export default function HomePage() {
           onClick={() => setIsPenaltyInfoOpen(false)}
         >
           <div
-            className="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl sm:p-8"
+            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -308,7 +308,7 @@ export default function HomePage() {
             {serviceCards.map(({ icon: Icon, title, description }, index) => (
               <div
                 key={title}
-                className="group relative h-full overflow-hidden rounded-2xl border border-gray-100/80 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                className="group relative h-full overflow-hidden rounded-2xl border border-gray-100/80 bg-white p-6 shadow-sm transition-all duration-300 md:hover:-translate-y-1 md:hover:shadow-md"
               >
                 <div className="absolute left-0 top-0 h-full w-1 bg-[#b91c1c] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#1e1b4b]/[0.06] transition-colors group-hover:bg-[#b91c1c]/10">
