@@ -92,7 +92,7 @@ const trustMarkers = [
 ];
 
 const homepageStats = [
-  { value: '5,000+', label: 'Returns Lodged' },
+  { value: 'Over 5000', label: 'Returns Lodged' },
   { value: '$80', label: 'Individual Returns From' },
   { value: '5★', label: 'Google Reviews' },
   { value: '100%', label: 'ATO Compliant' },
@@ -130,7 +130,7 @@ export default function HomePage() {
         <div className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90">
             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-            Trusted by 5,000+ Perth locals
+            Over 5000 returns lodged
           </p>
           <h1 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             Your tax return shouldn&apos;t be the thing keeping you up at night

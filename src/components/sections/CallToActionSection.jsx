@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 
+import C4FooterCredit from '@/components/c4-footer-credit/C4FooterCredit';
 import { Button } from '@/components/ui/button';
 import { getPagePath } from '@/config/routes';
 import { businessDetails } from '@/config/site';
@@ -48,6 +49,20 @@ export default function CallToActionSection({
               {secondaryLabel}
             </Button>
           </a>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-2">
+          <span className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/35">
+            Site by C4 Studios
+          </span>
+          <C4FooterCredit
+            href="https://c4studios.com"
+            label="Designed by C4 Studios"
+            size={36}
+            showText={false}
+            openInNewTab={true}
+            colorScheme="dark"
+          />
         </div>
       </div>
     </section>

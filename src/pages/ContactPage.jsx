@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle, Clock, Mail, MapPin, Phone, Send } from 'lucide-react';
 
+import C4FooterCredit from '@/components/c4-footer-credit/C4FooterCredit';
 import PageHeroSection from '@/components/sections/PageHeroSection';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -468,6 +469,25 @@ export default function ContactPage() {
                     <Mail className="h-4 w-4 flex-shrink-0" />
                     <span className="text-sm font-medium">{businessDetails.email}</span>
                   </a>
+
+              <div className="rounded-2xl border border-[#1e1b4b]/10 bg-white p-6 shadow-sm">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#1e1b4b]/50">
+                  Site by C4 Studios
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                  Digital design and build by C4 Studios, with a focus on clear conversion paths and a mobile-first experience.
+                </p>
+                <div className="mt-4 flex justify-center sm:justify-start">
+                  <C4FooterCredit
+                    href="https://c4studios.com"
+                    label="Designed by C4 Studios"
+                    size="large"
+                    showText={false}
+                    openInNewTab={true}
+                    colorScheme="light"
+                  />
+                </div>
+              </div>
                 </div>
                 <div className="mt-5 border-t border-white/10 pt-4">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">
