@@ -93,7 +93,7 @@ const trustMarkers = [
 
 const homepageStats = [
   { value: 'Over 5000', label: 'Returns Lodged' },
-  { value: '$80', label: 'Individual Returns From' },
+  { value: '$99', label: 'Individual Returns From' },
   { value: '5★', label: 'Google Reviews' },
   { value: '100%', label: 'ATO Compliant' },
 ];
@@ -148,7 +148,7 @@ export default function HomePage() {
               </Button>
             </Link>
             <span className="text-sm text-white/50">
-              Individual returns from <span className="font-semibold text-white/80">$80</span>
+              Individual returns from <span className="font-semibold text-white/80">$99</span>
             </span>
           </div>
         </div>

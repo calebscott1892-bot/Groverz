@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import SiteFooter from '@/components/layout/SiteFooter';
 import SiteHeader from '@/components/layout/SiteHeader';
+import WhatsAppButton from '@/components/common/WhatsAppButton';
 
 export default function SiteLayout({ children, activePageKey }) {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ export default function SiteLayout({ children, activePageKey }) {
       <SiteHeader activePageKey={activePageKey} />
       <main className="flex-1">{children}</main>
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 }

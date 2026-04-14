@@ -26,7 +26,7 @@ const defaultItems = [
   {
     question: 'How much does it cost?',
     answer:
-      "Individual returns start from $80. More complex work (businesses, trusts, SMSF) depends on scope — but we always provide a clear fixed-fee quote before we begin. You'll never be surprised by a bill.",
+      "Individual returns start from $99. More complex work (businesses, trusts, SMSF) depends on scope — but we always provide a clear fixed-fee quote before we begin. You'll never be surprised by a bill.",
   },
   {
     question: "I've got overdue returns — can you help?",
