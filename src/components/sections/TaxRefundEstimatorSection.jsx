@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getPagePath } from '@/config/routes';
 
+// ATO resident tax rates for 2025-26 (Stage 3 rates, unchanged from 2024-25).
+// Review before 1 July 2026 in case Parliament legislates new thresholds.
 const taxBrackets = [
   { min: 0, max: 18200, rate: 0, base: 0 },
   { min: 18201, max: 45000, rate: 0.16, base: 0 },
@@ -90,7 +92,7 @@ export default function TaxRefundEstimatorSection() {
                 Tax Refund Estimator
               </h2>
               <p className="mt-4 leading-relaxed text-white/70">
-                Get a quick, non-binding estimate of your potential tax refund based on the 2024-25
+                Get a quick, non-binding estimate of your potential tax refund based on the 2025-26
                 Australian resident tax rates. Enter your details and see your result instantly.
               </p>
 

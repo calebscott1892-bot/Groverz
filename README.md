@@ -48,6 +48,15 @@ This project is a static Vite single-page app with client-side routing and a sin
 - The SPA fallback is configured in `vercel.json`
 - Contact form submissions are handled by `api/contact.js`
 
+## Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `RESEND_API_KEY` | Yes | API key from [Resend](https://resend.com) for contact form email delivery |
+| `CONTACT_FROM_EMAIL` | No | Sender address (defaults to `onboarding@resend.dev` until custom domain is verified) |
+
+Set these in your Vercel/Netlify project settings or in a local `.env` file (see `.env.example`).
+
 In Vercel, add these environment variables to every environment that should send email:
 
 - `RESEND_API_KEY`

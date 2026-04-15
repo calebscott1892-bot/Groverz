@@ -1,7 +1,8 @@
 import React from 'react';
 
-const WHATSAPP_NUMBER = '61447183268';
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+import { businessDetails } from '@/config/site';
+
+const WHATSAPP_URL = `https://wa.me/${businessDetails.whatsAppNumber}`;
 
 export default function WhatsAppButton() {
   return (

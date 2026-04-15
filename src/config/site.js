@@ -1,6 +1,8 @@
 export const businessDetails = {
   name: 'Groverz Tax & Accounting Solutions',
   brandLines: ['Groverz Tax &', 'Accounting Solutions'],
+  displayPrice: '$99',
+  whatsAppNumber: '61447183268',
   email: 'ankit@groverztax.com.au',
   emailHref: 'mailto:ankit@groverztax.com.au',
   registrationLabel: 'Registered Tax Agent - Tax Practitioners Board',
