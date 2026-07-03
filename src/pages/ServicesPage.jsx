@@ -183,7 +183,7 @@ const serviceHighlights = [
   },
   {
     title: 'All entity types covered',
-    description: 'From a $99 individual return to complex trust and company structures.',
+    description: 'From individual returns to complex trust and company structures.',
   },
   {
     title: 'Plain-English guidance',
@@ -195,7 +195,7 @@ const serviceFaqs = [
   {
     question: 'How much does a tax return cost?',
     answer:
-      "Individual returns start from $99. Business, trust and company returns depend on complexity. We'll always provide a clear fixed-fee quote before starting — you'll never be surprised by an invoice.",
+      "It depends on the complexity of your return. Business, trust and company returns vary too. We'll always provide a clear fixed-fee quote before starting — you'll never be surprised by an invoice.",
   },
   {
     question: 'Can I switch to you mid-year?',

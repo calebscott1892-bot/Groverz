@@ -93,7 +93,6 @@ const trustMarkers = [
 
 const homepageStats = [
   { value: 'Over 5000', label: 'Returns Lodged' },
-  { value: '$99', label: 'Individual Returns From' },
   { value: '5★', label: 'Google Reviews' },
   { value: '100%', label: 'ATO Compliant' },
 ];
@@ -147,9 +146,7 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <span className="text-sm text-white/50">
-              Individual returns from <span className="font-semibold text-white/80">$99</span>
-            </span>
+            <span className="text-sm text-white/50">Fixed fees, quoted upfront</span>
           </div>
         </div>
 
@@ -160,11 +157,11 @@ export default function HomePage() {
 
       <section className="border-b border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8">
             {homepageStats.map(({ value, label }, index) => (
               <div key={label} className="relative text-center">
                 {index > 0 && (
-                  <div className="absolute left-0 top-1/2 hidden h-8 w-px -translate-y-1/2 bg-gray-200 md:block" />
+                  <div className="absolute left-0 top-1/2 hidden h-8 w-px -translate-y-1/2 bg-gray-200 sm:block" />
                 )}
                 <p className="text-3xl font-bold text-[#1e1b4b] sm:text-4xl">{value}</p>
                 <p className="mt-1.5 text-sm font-medium text-gray-500">{label}</p>
