@@ -191,13 +191,48 @@ function getFixedLetterHinge(letterNode, hingeOrigin) {
    INTERNAL HOOKS — replaces site-wide ThemeContext dependency
    ================================================================= */
 
-function useFooterColours(colorScheme) {
+function parseCssRgb(value) {
+  if (!value || value === 'transparent') return null;
+  const match = value.match(/rgba?\(([^)]+)\)/i);
+  if (!match) return null;
+
+  const [r, g, b, a = 1] = match[1]
+    .split(',')
+    .map((part) => Number.parseFloat(part.trim()));
+
+  if (![r, g, b].every(Number.isFinite) || !Number.isFinite(a) || a === 0) {
+    return null;
+  }
+
+  return { r, g, b };
+}
+
+function isDarkBackground(element) {
+  if (typeof window === 'undefined') return true;
+
+  let node = element?.parentElement || document.body;
+  while (node && node !== document.documentElement) {
+    const rgb = parseCssRgb(window.getComputedStyle(node).backgroundColor);
+    if (rgb) {
+      const luminance = (0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b) / 255;
+      return luminance < 0.45;
+    }
+    node = node.parentElement;
+  }
+
+  const bodyRgb = parseCssRgb(window.getComputedStyle(document.body).backgroundColor);
+  if (bodyRgb) {
+    const luminance = (0.2126 * bodyRgb.r + 0.7152 * bodyRgb.g + 0.0722 * bodyRgb.b) / 255;
+    return luminance < 0.45;
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function useFooterColours(colorScheme, rootRef) {
   const [isDark, setIsDark] = useState(() => {
     if (colorScheme === 'light') return false;
     if (colorScheme === 'dark') return true;
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
     return true;
   });
 
@@ -206,12 +241,26 @@ function useFooterColours(colorScheme) {
       setIsDark(colorScheme === 'dark');
       return;
     }
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = (e) => setIsDark(e.matches);
-    setIsDark(mq.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, [colorScheme]);
+
+    if (typeof window === 'undefined') return;
+
+    const update = () => setIsDark(isDarkBackground(rootRef.current));
+    update();
+
+    window.addEventListener('resize', update);
+
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'style'],
+      subtree: true,
+    });
+
+    return () => {
+      window.removeEventListener('resize', update);
+      observer.disconnect();
+    };
+  }, [colorScheme, rootRef]);
 
   return useMemo(() => {
     const dormant = { ...COLOURS.dormant };
@@ -285,7 +334,7 @@ function MorphWordPaths({ pairs, fill, refs }) {
  * @param {string}  [props.className='']   Additional classes on the root <a>
  * @param {boolean} [props.openInNewTab=true]  Open link in new tab
  * @param {boolean} [props.showText=true]  Show credit text below logo
- * @param {string}  [props.colorScheme='dark']  'dark' | 'light' | 'auto'
+ * @param {string}  [props.colorScheme='auto']  'dark' | 'light' | 'auto'
  */
 export default function C4FooterCredit({
   href = 'https://c4studios.com.au',
@@ -294,7 +343,7 @@ export default function C4FooterCredit({
   className = '',
   openInNewTab = true,
   showText = true,
-  colorScheme = 'dark',
+  colorScheme = 'auto',
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -331,7 +380,7 @@ export default function C4FooterCredit({
   const computedRef = useRef(null);
 
   const h = typeof size === 'number' ? size : (SIZES[size] || SIZES.default);
-  const { dormant, mono, colour } = useFooterColours(colorScheme);
+  const { dormant, mono, colour } = useFooterColours(colorScheme, rootRef);
   const uid = useId();
 
   const w = Math.round(h * FULL_ASPECT);
@@ -758,27 +807,34 @@ export default function C4FooterCredit({
         </defs>
 
         <g transform={LOCKUP_TRANSFORM}>
+          {/* Backdrop — soft translucent bubble */}
           <ellipse
             ref={backdropRef}
-            cx="206"
-            cy="389"
-            rx="165"
-            ry="120"
+            cx="206" cy="389"
+            rx="165" ry="120"
             fill="#555"
             opacity="0.15"
             filter={`url(#${backdropBlurId})`}
           />
 
+          {/* C — dormant/mono base */}
           <path ref={cBaseRef} d={FULL_UPRIGHT.cArc} fill={mono.cArc} filter={`url(#${cPresenceId})`} />
 
+          {/* C — colour layer (clipped by iris bloom) */}
           <g ref={cColourRef}>
             <path d={FULL_UPRIGHT.cArc} fill={colour.cArc} clipPath={`url(#${cClipId})`} />
           </g>
 
+          {/* 4 body — dormant palette */}
           <polygon ref={bodyDormantRef} points={FULL_UPRIGHT.fourBody} fill={dormant.fourBody} />
+
+          {/* 4 body — mono base */}
           <polygon ref={bodyBaseRef} points={FULL_UPRIGHT.fourBody} fill={mono.fourBody} />
+
+          {/* 4 body — colour seal */}
           <polygon ref={bodySealRef} points={FULL_UPRIGHT.fourBody} fill={colour.fourBody} />
 
+          {/* Colour build segments */}
           <g ref={stemUpperRef} clipPath={`url(#${stemUpperClipId})`}>
             <polygon points={FULL_UPRIGHT.fourBody} fill={colour.fourBody} />
           </g>
@@ -788,6 +844,7 @@ export default function C4FooterCredit({
             </g>
           </g>
 
+          {/* Arm group */}
           <g>
             <g ref={armDormantRef}>
               <polygon points={FULL_UPRIGHT.fourArm} fill={dormant.fourArm} />
@@ -804,6 +861,7 @@ export default function C4FooterCredit({
             <polygon ref={armSealRef} points={FULL_UPRIGHT.fourArm} fill={colour.fourArm} />
           </g>
 
+          {/* Word "Studios" — letters individually animated */}
           <g ref={wordGroupRef}>
             <MorphWordPaths pairs={C4_WORDMARK_MORPH_PAIRS} fill={mono.text} refs={morphLetterRefs} />
           </g>

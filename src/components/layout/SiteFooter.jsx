@@ -132,7 +132,7 @@ export default function SiteFooter() {
           <div className="flex flex-col items-center justify-center gap-2">
             <span className="text-[11px] font-medium tracking-widest text-white/30 uppercase">Designed &amp; built by</span>
             <C4FooterCredit
-              href="https://c4studios.com"
+              href="https://c4studios.com.au"
               label="Designed by C4 Studios"
               size="large"
               showText={true}

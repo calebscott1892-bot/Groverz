@@ -479,7 +479,7 @@ export default function ContactPage() {
                 </p>
                 <div className="mt-4 flex justify-center sm:justify-start">
                   <C4FooterCredit
-                    href="https://c4studios.com"
+                    href="https://c4studios.com.au"
                     label="Designed by C4 Studios"
                     size="large"
                     showText={false}

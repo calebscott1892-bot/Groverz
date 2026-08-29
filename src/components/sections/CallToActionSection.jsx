@@ -56,7 +56,7 @@ export default function CallToActionSection({
             Site by C4 Studios
           </span>
           <C4FooterCredit
-            href="https://c4studios.com"
+            href="https://c4studios.com.au"
             label="Designed by C4 Studios"
             size={36}
             showText={false}
